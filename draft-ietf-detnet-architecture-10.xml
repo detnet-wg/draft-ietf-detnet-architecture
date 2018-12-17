@@ -205,13 +205,17 @@
 				  include a DetNet service sub-layer proxy function for DetNet service 
 				  protection (e.g., the addition or removal of packet sequencing information)
 				  for one or more end systems, or starts or terminates congestion protection at
-				  the DetNet transport sub-layer, or aggregates DetNet services into new DetNet flows.
+				  the DetNet forwarding sub-layer, or aggregates DetNet services into new DetNet flows.
 				  It is analogous to a Label Edge Router (LER) or a Provider Edge (PE) router.
 			  </t>
 			  <t hangText="DetNet flow"><vspace blankLines="0"/>
 				A DetNet flow is a sequence of packets from one source to one or more destinations, 
 				which conform uniquely to a flow identifier, and to which the DetNet service is to 
 				be provided.
+			  </t>
+			  <t hangText="DetNet forwarding sub-layer"><vspace blankLines="0"/>
+				  The DetNet layer that optionally provides congestion protection for DetNet flows
+				  over paths provided by the underlying network.
 			  </t>
 			  <t hangText="DetNet intermediate node"><vspace blankLines="0"/>
 				  A DetNet relay node or DetNet transit node.
@@ -221,9 +225,9 @@
 			  </t>
 			  <t hangText="DetNet relay node"><vspace blankLines="0"/>
 				A DetNet node including a service sub-layer function that interconnects different
-				DetNet transport sub-layer paths to provide service protection.  A DetNet relay node
+				DetNet forwarding sub-layer paths to provide service protection.  A DetNet relay node
 				participates in the DetNet service
-				sub-layer.  It typically incorporates DetNet transport sub-layer functions as
+				sub-layer.  It typically incorporates DetNet forwarding sub-layer functions as
 				well, in which case it is collocated with a transit node.
 			  </t>
 			  <t hangText="DetNet service sub-layer"><vspace blankLines="0"/>
@@ -240,15 +244,11 @@
 				  "DetNet" may be omitted in some text.
 			  </t>
 			  <t hangText="DetNet transit node"><vspace blankLines="0"/>
-				  A DetNet node operating at the DetNet transport sub-layer, that utilizes link layer
+				  A DetNet node operating at the DetNet forwarding sub-layer, that utilizes link layer
 				  and/or network layer switching across multiple
 				  links and/or sub-networks to provide paths for DetNet service sub-layer functions.
 				  Typically provides congestion protection over those paths.
 				  An MPLS LSR is an example of a DetNet transit node.
-			  </t>
-			  <t hangText="DetNet transport sub-layer"><vspace blankLines="0"/>
-				  The DetNet layer that optionally provides congestion protection for DetNet flows
-				  over paths provided by the underlying network.
 			  </t>
 			  <t hangText="DetNet-UNI"><vspace blankLines="0"/>
 				  User-to-Network Interface with DetNet specific functionalities. It is a packet-based reference point and may provide multiple functions like encapsulation, status, synchronization, etc.
@@ -257,7 +257,7 @@
 				  Commonly called a "host" in IETF documents, and an "end
 				  station" is IEEE 802 documents.  End systems of interest to
 				  this document are either sources or destinations of DetNet flows.
-				  And end system may or may not be DetNet transport sub-layer aware or
+				  And end system may or may not be DetNet forwarding sub-layer aware or
 				  DetNet service sub-layer aware.
 			  </t>
 			  <t hangText="link"><vspace blankLines="0"/>
@@ -553,7 +553,7 @@
 				Providing sequencing information to the
 				packets of a DetNet compound flow.  This may
 				be done by adding a sequence number or time stamp as part of DetNet, or may be
-				inherent in the packet, e.g., in a Layer-4 transport protocol, or associated to other physical
+				inherent in the packet, e.g., in a higher layer protocol, or associated to other physical
 				properties such as the precise time (and radio channel) of reception of the packet.
 				This is typically done once, at or near the source.
 			  </t><t>
@@ -766,9 +766,9 @@ title="Packet replication and elimination">
 	    <t>
 		  DetNet functionality (<xref target="ProvidingQoS"/>) is implemented
 		  in two adjacent sub-layers in the protocol stack: the DetNet service
-		  sub-layer and the DetNet transport sub-layer. The DetNet service sub-layer
+		  sub-layer and the DetNet forwarding sub-layer. The DetNet service sub-layer
 		  provides DetNet service, e.g., service protection,  to higher layers
-		  in the protocol stack and applications. The DetNet transport sub-layer 
+		  in the protocol stack and applications. The DetNet forwarding sub-layer 
 		  supports DetNet service in the underlying network, e.g., by 
 		  providing explicit routes and congestion protection to DetNet flows.
 		</t>
@@ -780,24 +780,24 @@ title="Packet replication and elimination">
 <figure align="center" anchor="ProtStack1"
 title="DetNet data plane protocol stack">
 <artwork align="center"><![CDATA[
-  |  packets going  |        ^  packets coming   ^
-  v down the stack  v        |   up the stack    |
-+----------------------+   +-----------------------+
-|        Source        |   |      Destination      |
-+----------------------+   +-----------------------+
-|  Service sub-layer:  |   |   Service sub-layer:  |
-|  Packet sequencing   |   | Duplicate elimination |
-|  Flow replication    |   |      Flow merging     |
-|   Packet encoding    |   |    Packet decoding    |
-+----------------------+   +-----------------------+
-| Transport sub-layer: |   |  Transport sub-layer: |
-|   Congestion prot.   |   |    Congestion prot.   |
-|   Explicit routes    |   |    Explicit routes    |
-+----------------------+   +-----------------------+
-|     Lower layers     |   |     Lower layers      |
-+----------------------+   +-----------------------+
-           v                           ^
-            \_________________________/
+   |  packets going  |        ^  packets coming   ^
+   v down the stack  v        |   up the stack    |
++-----------------------+   +-----------------------+
+|        Source         |   |      Destination      |
++-----------------------+   +-----------------------+
+|   Service sub-layer:  |   |   Service sub-layer:  |
+|   Packet sequencing   |   | Duplicate elimination |
+|    Flow replication   |   |      Flow merging     |
+|    Packet encoding    |   |    Packet decoding    |
++-----------------------+   +-----------------------+
+| Forwarding sub-layer: |   | Forwarding sub-layer: |
+|    Congestion prot.   |   |    Congestion prot.   |
+|    Explicit routes    |   |    Explicit routes    |
++-----------------------+   +-----------------------+
+|     Lower layers      |   |     Lower layers      |
++-----------------------+   +-----------------------+
+            v                           ^
+             \_________________________/
 ]]></artwork>
 </figure>
             <t>
@@ -810,7 +810,7 @@ title="DetNet data plane protocol stack">
                     <t hangText="Packet sequencing"><vspace blankLines="0"/>
                         As part of DetNet service protection, supplies the sequence number for
                         packet replication and elimination (<xref target="srvcprot"/>).  Peers
-                        with Duplicate elimination.  This sub-layer is not needed if a Layer-4 transport protocol
+                        with Duplicate elimination.  This sub-layer is not needed if a higher layer protocol
                         is expected to perform any packet sequencing and duplicate elimination
                         required by the DetNet flow replication.
                     </t>
@@ -857,14 +857,14 @@ title="DetNet data plane protocol stack">
                         compound flows input to packet encoding.  Peers with Packet encoding.
                     </t>
                     <t hangText="Congestion protection"><vspace blankLines="0"/>
-                        The DetNet transport sub-layer provides congestion protection. See <xref target="QueuingModels"/>.
+                        The DetNet forwarding sub-layer provides congestion protection. See <xref target="QueuingModels"/>.
                         The actual queuing and shaping mechanisms are typically provided by underlying subnet,
                         these can be closely associated with the means of providing paths
                         for DetNet flows,
                         the path and the congestion protection are conflated in this figure.
                     </t>
 					<t hangText="Explicit routes"><vspace blankLines="0"/>
-                        The DetNet transport sub-layer provides mechanisms to ensure that fixed paths are provided
+                        The DetNet forwarding sub-layer provides mechanisms to ensure that fixed paths are provided
                         for DetNet flows. These explicit paths avoid the impact of network convergence.
                     </t> 
 
@@ -903,25 +903,25 @@ title="DetNet data plane protocol stack">
             OTN.  Of course, multi-layer DetNet systems may also be possible, where
             one DetNet appears as a sub-network, and provides service to, a higher layer
             DetNet system. A simple DetNet concept network is shown in <xref target="fig_detnet"/>.
-			Note that in this and following figures "Transport" and "Trp" refer to the DetNet
-			transport sub-layer, "Service" and "Svc" refer to the DetNet service sub-layer, 
+			Note that in this and following figures "Forwarding" and "Fwd" refer to the DetNet
+			forwarding sub-layer, "Service" and "Svc" refer to the DetNet service sub-layer, 
             which are described in detail in <xref target="Stacks"/>.
           </t>
 <figure anchor="fig_detnet" align="center"
 title="A Simple DetNet Enabled Network">
 <artwork align="center"><![CDATA[
-TSN              Edge          Transit        Relay        DetNet
-End System       Node            Node         Node         End System
+TSN               Edge        Transit         Relay        DetNet
+End System        Node         Node           Node        End System
 
-+---------+   +.........+                                 +---------+
-|  Appl.  |<--:Svc Proxy:-- End to End Service ---------->|  Appl.  |
-+---------+   +---------+                   +---------+   +---------+
-|   TSN   |   |TSN| |Svc|<-- DetNet flow ---: Service :-->| Service |
-+---------+   +---+ +---+    +---------+    +---------+   +---------+
-|Transport|   |Trp| |Trp|    |Transport|    |Trp| |Trp|   |Transport|
-+-------.-+   +-.-+ +-.-+    +--.----.-+    +-.-+ +-.-+   +---.-----+
-        :  Link :    /  ,-----.  \   :  Link  :    /  ,-----.  \
-        +.......+    +-[  Sub  ]-+   +........+    +-[  Sub  ]-+
++----------+   +.........+                               +----------+
+|  Appl.   |<--:Svc Proxy:-- End to End Service -------->|  Appl.   |
++----------+   +---------+                 +---------+   +----------+
+|   TSN    |   |TSN| |Svc|<- DetNet flow --: Service :-->| Service  |
++----------+   +---+ +---+   +--------+    +---------+   +----------+
+|Forwarding|   |Fwd| |Fwd|   |  Fwd   |    |Fwd| |Fwd|   |Forwarding|
++-------.--+   +-.-+ +-.-+   +--.----.+    +-.-+ +-.-+   +---.------+
+        :  Link  :    /  ,-----. \   :  Link   :    /  ,-----.  \
+        +........+    +-[  Sub  ]-+  +.........+    +-[  Sub  ]-+
                         [Network]                     [Network] 
                          `-----'                       `-----'
 ]]></artwork>
@@ -929,7 +929,7 @@ End System       Node            Node         Node         End System
 
           <t>
             Distinguishing the function of two DetNet data plane sub-layers, the DetNet service
-            sub-layer and the DetNet transport sub-layer, helps to
+            sub-layer and the DetNet forwarding sub-layer, helps to
             explore and evaluate various combinations of the data plane solutions
             available, some are illustrated in <xref target="fig_adaptation"/>.  This separation of DetNet sub-layers, while helpful, should not be
             considered as formal requirement.  For example, some technologies may violate
@@ -941,11 +941,11 @@ title="DetNet adaptation to data plane">
 <artwork align="center"><![CDATA[
               .
               .
-+----------------------------+
-|  DetNet Service sub-layer  | PW, UDP, GRE
-+----------------------------+
-| DetNet Transport sub-layer | IPv6, IPv4, MPLS TE LSPs, MPLS SR
-+----------------------------+
++-----------------------------+
+|  DetNet Service sub-layer   | PW, UDP, GRE
++-----------------------------+
+| DetNet Forwarding sub-layer | IPv6, IPv4, MPLS TE LSPs, MPLS SR
++-----------------------------+
               .
               .
 ]]></artwork>
@@ -960,7 +960,7 @@ title="DetNet adaptation to data plane">
           <t>
             There are many valid options to create a data plane solution for DetNet
             traffic by selecting a technology approach for the DetNet service sub-layer and
-            also selecting a technology approach for the DetNet transport sub-layer. There are
+            also selecting a technology approach for the DetNet forwarding sub-layer. There are
             a high number of valid combinations.
           </t>
           <t>
@@ -969,7 +969,7 @@ title="DetNet adaptation to data plane">
             nodes.  For example, the basic service can be delivered based on an MPLS label
 			or an IP header. This decision impacts the basic forwarding logic for the DetNet
 			service sub-layer. Note that in both cases, IP addresses are used to address DetNet nodes.
-	        The selected DetNet transport sub-layer technology also needs to be mapped to the sub-net
+	        The selected DetNet forwarding sub-layer technology also needs to be mapped to the sub-net
 			technology used to interconnect DetNet nodes. For example, DetNet flows will need to
 			be mapped to TSN Streams.
           </t>
@@ -1020,11 +1020,11 @@ end system                                                 end system
 	  <section anchor="netrefsys" title="DetNet systems">
 	  <section anchor="es" title="End system">
 		<t> 
-		The native data flow between the source/destination end systems is referred to as application-flow (App-flow). The traffic characteristics of an App-flow can be CBR (constant bit rate) or VBR (variable bit rate) and can have L1 or L2 or L3 encapsulation (e.g., TDM (time-division multiplexing), Ethernet, IP). These characteristics are considered as input for resource reservation and might be simplified to ensure determinism during transport (e.g., making reservations for the peak rate of VBR traffic, etc.).
+		The native data flow between the source/destination end systems is referred to as application-flow (App-flow). The traffic characteristics of an App-flow can be CBR (constant bit rate) or VBR (variable bit rate) and can have L1 or L2 or L3 encapsulation (e.g., TDM (time-division multiplexing), Ethernet, IP). These characteristics are considered as input for resource reservation and might be simplified to ensure determinism during packet forwarding (e.g., making reservations for the peak rate of VBR traffic, etc.).
 		</t>
 
 		<t> 
-		An end system may or may not be DetNet transport sub-layer aware or DetNet service sub-layer aware. That is, an end system may or may not contain DetNet specific functionality. End systems with DetNet functionalities may have the same or different transport sub-layer as the connected DetNet domain. Categorization of end systems are shown in <xref target="fig_endsys2"/>. 
+		An end system may or may not be DetNet forwarding sub-layer aware or DetNet service sub-layer aware. That is, an end system may or may not contain DetNet specific functionality. End systems with DetNet functionalities may have the same or different forwarding sub-layer as the connected DetNet domain. Categorization of end systems are shown in <xref target="fig_endsys2"/>. 
 		</t> 
 
 <figure anchor="fig_endsys2" align="center"
@@ -1040,7 +1040,7 @@ title="Categorization of end systems">
         |        v        |
  DetNet unaware           |
    End system             |
-                          | Service/Transport
+                          | Service/Forwarding
                           |  sub-layer
                          / \  aware ?
                +--------<   >-------------+
@@ -1060,7 +1060,7 @@ title="Categorization of end systems">
 		Note some known use case examples for end systems:
 	     <list style="symbols">
 			<t> DetNet unaware: The classic case requiring service proxies.</t>
-			<t> DetNet t-aware: A DetNet transport sub-layer aware system. It knows about some TSN functions (e.g., reservation), but not about service protection. </t>
+			<t> DetNet t-aware: A DetNet forwarding sub-layer aware system. It knows about some TSN functions (e.g., reservation), but not about service protection. </t>
 			<t> DetNet s-aware: A DetNet service sub-layer aware system. It supplies sequence numbers, but doesn't know about zero congestion loss. </t>
 			<t> DetNet st-aware: A full functioning DetNet end system, it has DetNet functionalities and usually the same forwarding paradigm as the connected DetNet domain. It can be treated as an integral part of the DetNet domain. </t>
 		</list>
@@ -1071,10 +1071,10 @@ title="Categorization of end systems">
             As shown in <xref target="fig_detnet"/>, DetNet edge nodes providing proxy
             service and DetNet relay nodes providing the DetNet service sub-layer are
             DetNet-aware, and DetNet transit nodes need only be aware of the DetNet
-            transport sub-layer.
+            forwarding sub-layer.
           </t><t>
             In general, if a DetNet flow passes through one or more DetNet-unaware
-            network nodes between two DetNet nodes providing the DetNet transport sub-layer
+            network nodes between two DetNet nodes providing the DetNet forwarding sub-layer
             for that flow, there is a potential for disruption or failure of the
             DetNet QoS.  A network administrator needs to ensure that the DetNet-unaware
             network nodes are configured to minimize the chances of packet loss and
@@ -1088,13 +1088,13 @@ title="Categorization of end systems">
           
           <section anchor="DetNetFlowsTypes" title="DetNet flow types">
               <t>
-                  A DetNet flow can have different formats while it is transported between the peer end systems. Therefore, the following possible types / formats of a DetNet flow are distinguished in this document:
+                  A DetNet flow can have different formats while its packets are forwarded between the peer end systems. Therefore, the following possible types / formats of a DetNet flow are distinguished in this document:
                   <list style="symbols">
                       <t> App-flow: native format of the data carried over a DetNet flow. It does not contain any DetNet related attributes.</t>
-                      <t> DetNet-t-flow: specific format of a DetNet flow. Only requires the congestion / latency features provided by the DetNet transport sub-layer. </t>
+                      <t> DetNet-t-flow: specific format of a DetNet flow. Only requires the congestion / latency features provided by the DetNet forwarding sub-layer. </t>
                       <t> DetNet-s-flow: specific format of a DetNet flow. Only requires the service protection feature ensured by the DetNet service sub-layer. </t>
                       <t> DetNet-st-flow: specific format of a DetNet flow. It requires both DetNet service
-                          sub-layer and DetNet transport sub-layer functions during forwarding. </t>
+                          sub-layer and DetNet forwarding sub-layer functions during forwarding. </t>
                   </list>
               </t>
           </section>
@@ -1449,7 +1449,7 @@ End system    |  +----+ |       /   \/ \_      | +----+  | End system
 	  </section>
 
 	  <section anchor="FlowAttrMapping" title="Flow attribute mapping between layers">
-		<t>Transport of DetNet flows over multiple technology domains may require that lower layers are aware of specific flows of higher layers. Such an "exporting of flow identification" is needed each time when the forwarding paradigm is changed on the forwarding path (e.g., two LSRs are interconnected by a L2 bridged domain, etc.). The three representative forwarding methods considered for deterministic networking are:
+		<t>Forwarding of packets of DetNet flows over multiple technology domains may require that lower layers are aware of specific flows of higher layers. Such an "exporting of flow identification" is needed each time when the forwarding paradigm is changed on the forwarding path (e.g., two LSRs are interconnected by a L2 bridged domain, etc.). The three representative forwarding methods considered for deterministic networking are:
 		<list style="symbols">
 			<t>IP routing</t>
 			<t>MPLS label switching</t>
@@ -1485,7 +1485,7 @@ title="Packet with multiple Flow-IDs">
 			<t>created by a domain specific function or </t>
 			<t>derived from the Flow-ID added to the App-flow. </t>
 		</list>
-		The Flow-ID must be unique inside a given domain. Note that the Flow-ID added to the App-flow is still present in the packet, but transport nodes may lack the function to recognize it; that's why the additional Flow-ID is added.
+		The Flow-ID must be unique inside a given domain. Note that the Flow-ID added to the App-flow is still present in the packet, but network nodes may lack the function to recognize it; that's why the additional Flow-ID is added.
 		</t>
 		</section>
 
