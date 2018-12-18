@@ -204,7 +204,7 @@
 				  destination at the DetNet service sub-layer. For example, it can 
 				  include a DetNet service sub-layer proxy function for DetNet service 
 				  protection (e.g., the addition or removal of packet sequencing information)
-				  for one or more end systems, or starts or terminates congestion protection at
+				  for one or more end systems, or starts or terminates resource allocation at
 				  the DetNet forwarding sub-layer, or aggregates DetNet services into new DetNet flows.
 				  It is analogous to a Label Edge Router (LER) or a Provider Edge (PE) router.
 			  </t>
@@ -214,7 +214,7 @@
 				be provided.
 			  </t>
 			  <t hangText="DetNet forwarding sub-layer"><vspace blankLines="0"/>
-				  The DetNet layer that optionally provides congestion protection for DetNet flows
+				  The DetNet layer that optionally provides resource allocation for DetNet flows
 				  over paths provided by the underlying network.
 			  </t>
 			  <t hangText="DetNet intermediate node"><vspace blankLines="0"/>
@@ -247,7 +247,7 @@
 				  A DetNet node operating at the DetNet forwarding sub-layer, that utilizes link layer
 				  and/or network layer switching across multiple
 				  links and/or sub-networks to provide paths for DetNet service sub-layer functions.
-				  Typically provides congestion protection over those paths.
+				  Typically provides resource allocation over those paths.
 				  An MPLS LSR is an example of a DetNet transit node.
 			  </t>
 			  <t hangText="DetNet-UNI"><vspace blankLines="0"/>
@@ -355,7 +355,7 @@
 			Three techniques are used by DetNet to provide these qualities of service:
 			<list style="symbols">
 				<t>
-					 Resource allocation (<xref target="Zero"/>).
+					Resource allocation (<xref target="Zero"/>).
 				</t><t>
 					Service protection (<xref target="srvcprot"/>).
 				</t><t>
@@ -374,9 +374,9 @@
 			consideration in DetNet, as it serves a different set of applications.
 		</t><t>
             Resource allocation addresses two of the DetNet QoS requirements:
-            latency and packet loss.  Given that DetNet nodes have a finite
-            amount of buffer space, Resource allocation necessarily results in
-            a maximum end-to-end latency.  It also addresses contention related
+            latency and packet loss. Given that DetNet nodes have a finite
+            amount of buffer space, resource allocation necessarily results in
+            a maximum end-to-end latency. It also addresses contention related
             packet loss. 
 		</t><t>
 			Other important contribution to packet loss are
@@ -412,11 +412,9 @@
 					front or the end of Ethernet frames. <xref target="RFC8227"/> provides 
 					another example in the context of MPLS.
 				</t><t>
-					Congestion protection alone is offered by IEEE 802.1 Audio Video bridging
+					Resource allocation alone is offered by IEEE 802.1 Audio Video bridging
 					<xref target="IEEE802.1BA"/>.  As long as the network suffers no failures,
-					zero congestion loss can be achieved through the use of
-					a reservation protocol (e.g., Multiple Stream Registration Protocol <xref target="IEEE802.1Q-2018"/>), shapers in every bridge, and
-					proper dimensioning.
+					packet loss due to output packet contention can be eliminated through the use of a reservation protocol (e.g., Multiple Stream Registration Protocol <xref target="IEEE802.1Q-2018"/>), shapers in every bridge, and proper dimensioning.
 				</t><t>
 					Using all three together gives maximum protection.
 				</t>
@@ -439,16 +437,16 @@
 		</t>
     </section>
     <section anchor="Techniques" title="Mechanisms to achieve DetNet QoS">
-	  <section anchor="Zero" title="Congestion protection">
-	  <section anchor="ZeroL" title="Eliminate congestion loss">
+	  <section anchor="Zero" title="Resource allocation">
+	  <section anchor="ZeroL" title="Eliminate contention loss">
 		<t>
-			The primary means by which DetNet achieves its QoS assurances is to reduce, or even completely
-			eliminate, congestion within a DetNet node as a cause of packet loss. 
+			The primary means by which DetNet achieves its QoS assurances is to reduce, or even completely eliminate packet loss due to output packet contention
+			within a DetNet node as a cause of packet loss. 
 			This can be achieved only by the provision of
 			sufficient buffer storage at each node through the network to ensure that no
 			packets are dropped due to a lack of buffer storage. 
 			Note that a DetNet flow cannot be throttled, i.e., its transmission rate cannot be
-			reduced via explicit congestion notification.
+			reduced via explicit congestion notification <xref target="RFC3168"/>.
 		</t><t>
 			Ensuring adequate buffering requires, in turn, that the source, and every DetNet
 			node along the path to the destination (or nearly every node, see
@@ -461,7 +459,7 @@
 			The low-level mechanisms described in <xref target="QueuingModels"/> provide
 			the necessary
 			regulation of transmissions by an end system or DetNet node to provide
-			congestion protection.  The allocation of the bandwidth and
+			resource allocation.  The allocation of the bandwidth and
 			buffers for a DetNet flow requires provisioning. 
 			A DetNet node may have other resources requiring allocation and/or scheduling,
 			that might otherwise be over-subscribed and trigger the rejection of a reservation.
@@ -502,7 +500,7 @@
        </list>
        </t><t>
 	     Jitter reduction is provided by the mechanisms described in <xref target="QueuingModels"/>
-	     that also provide congestion protection.
+	     that also provide resource allocation.
 	   </t>
 	  </section>
 	  </section>
@@ -592,7 +590,7 @@
 			has two interfaces, and conveying them through the network, along separate 
 			(SRLG disjoint) paths, to the
 			similarly dual-homed destinations, that discard the extras.  This ensures that one
-			path (with zero congestion loss) remains, even if some DetNet intermediate node fails.
+			path remains, even if some DetNet intermediate node fails.
 			The sequencing information can also be used for loss detection and for re-ordering.
 		</t><t>
 			DetNet relay nodes in the network can provide
@@ -626,7 +624,7 @@ title="Packet replication and elimination">
 			or misrouted data is handled just the same as the equipment failures
 			that are handled by typical routing and bridging protocols.
 		</t><t>
-			If packet replication and elimination is used over paths providing congestion protection
+			If packet replication and elimination is used over paths providing resource  allocation
 			(<xref target="Zero"/>), and member flows that take different-length paths
 			through the network are combined, a merge
 			point may require extra buffering to equalize the delays over the different paths.  This
@@ -771,7 +769,7 @@ title="Packet replication and elimination">
 		  provides DetNet service, e.g., service protection,  to higher layers
 		  in the protocol stack and applications. The DetNet forwarding sub-layer 
 		  supports DetNet service in the underlying network, e.g., by 
-		  providing explicit routes and congestion protection to DetNet flows.
+		  providing explicit routes and resource allocation to DetNet flows.
 		</t>
         <section anchor="StackModel" title="Representative Protocol Stack Model">
             <t>
@@ -792,7 +790,7 @@ title="DetNet data plane protocol stack">
 |    Packet encoding    |   |    Packet decoding    |
 +-----------------------+   +-----------------------+
 | Forwarding sub-layer: |   | Forwarding sub-layer: |
-|    Congestion prot.   |   |    Congestion prot.   |
+|  Resource allocation  |   |  Resource allocation  |
 |    Explicit routes    |   |    Explicit routes    |
 +-----------------------+   +-----------------------+
 |     Lower layers      |   |     Lower layers      |
@@ -857,12 +855,12 @@ title="DetNet data plane protocol stack">
                         flows, and computes from those packets the original DetNet packets from the
                         compound flows input to packet encoding.  Peers with Packet encoding.
                     </t>
-                    <t hangText="Congestion protection"><vspace blankLines="0"/>
-                        The DetNet forwarding sub-layer provides congestion protection. See <xref target="QueuingModels"/>.
+                    <t hangText="Resource allocation"><vspace blankLines="0"/>
+                        The DetNet forwarding sub-layer provides resource allocation. See <xref target="QueuingModels"/>.
                         The actual queuing and shaping mechanisms are typically provided by underlying subnet,
                         these can be closely associated with the means of providing paths
                         for DetNet flows,
-                        the path and the congestion protection are conflated in this figure.
+                        the path and the resource allocation are conflated in this figure.
                     </t>
 					<t hangText="Explicit routes"><vspace blankLines="0"/>
                         The DetNet forwarding sub-layer provides mechanisms to ensure that fixed paths are provided
@@ -1062,7 +1060,7 @@ title="Categorization of end systems">
 	     <list style="symbols">
 			<t> DetNet unaware: The classic case requiring service proxies.</t>
 			<t> DetNet t-aware: A DetNet forwarding sub-layer aware system. It knows about some TSN functions (e.g., reservation), but not about service protection. </t>
-			<t> DetNet s-aware: A DetNet service sub-layer aware system. It supplies sequence numbers, but doesn't know about zero congestion loss. </t>
+			<t> DetNet s-aware: A DetNet service sub-layer aware system. It supplies sequence numbers, but doesn't know about resource allocation. </t>
 			<t> DetNet st-aware: A full functioning DetNet end system, it has DetNet functionalities and usually the same forwarding paradigm as the connected DetNet domain. It can be treated as an integral part of the DetNet domain. </t>
 		</list>
 		</t> 
@@ -1092,7 +1090,7 @@ title="Categorization of end systems">
                   A DetNet flow can have different formats while its packets are forwarded between the peer end systems. Therefore, the following possible types / formats of a DetNet flow are distinguished in this document:
                   <list style="symbols">
                       <t> App-flow: native format of the data carried over a DetNet flow. It does not contain any DetNet related attributes.</t>
-                      <t> DetNet-t-flow: specific format of a DetNet flow. Only requires the congestion / latency features provided by the DetNet forwarding sub-layer. </t>
+                      <t> DetNet-t-flow: specific format of a DetNet flow. Only requires the resource allocation features provided by the DetNet forwarding sub-layer. </t>
                       <t> DetNet-s-flow: specific format of a DetNet flow. Only requires the service protection feature ensured by the DetNet service sub-layer. </t>
                       <t> DetNet-st-flow: specific format of a DetNet flow. It requires both DetNet service
                           sub-layer and DetNet forwarding sub-layer functions during forwarding. </t>
@@ -1102,7 +1100,7 @@ title="Categorization of end systems">
           
           <section anchor="FlowLimits" title="Source transmission behavior">
               <t>
-                  For the purposes of congestion protection,
+                  For the purposes of resource allocation,
                   DetNet flows can be synchronous or asynchronous.
                   In synchronous DetNet flows, at least the DetNet nodes (and possibly
                   the end systems) are closely time
@@ -1141,7 +1139,7 @@ title="Categorization of end systems">
                   period of time.
               </t><t>
                   There is no provision in DetNet for throttling DetNet flows, i.e.,
-                  the transmission rate cannot be reduced via explicit congestion notification. The assumption
+                  the transmission rate cannot be reduced via explicit congestion notification <xref target="RFC3168"/>. The assumption
                   is that a DetNet flow, to be useful, must be delivered in its entirety.  That
                   is, while any useful application is written to expect a certain number of lost
                   packets, the real-time applications of interest to DetNet demand that the loss of
@@ -1189,7 +1187,7 @@ title="Categorization of end systems">
          The Deterministic Networking architecture is thus composed
          of three planes, a (User) Application Plane, a Controller Plane, and a
          Network Plane, which echoes that of Figure 1 of
-         <xref target="RFC7426">Software-Defined Networking (SDN): 
+         <xref target="RFC7426"> Software-Defined Networking (SDN): 
          Layers and Architecture Terminology</xref>.:
 		</t>
 
@@ -1304,7 +1302,7 @@ title="Northbound and Southbound interfaces">
 	  </section>
 	  <section anchor="QueuingModels" title="Queuing, Shaping, Scheduling, and Preemption">
 		<t>
-		  DetNet achieves congestion protection and bounded delivery latency
+		  DetNet achieves bounded delivery latency
 		  by reserving bandwidth and buffer resources at each DetNet node along
 		  the path of the DetNet flow.
 		  The reservation itself is not sufficient, however.  Implementors and users of a
