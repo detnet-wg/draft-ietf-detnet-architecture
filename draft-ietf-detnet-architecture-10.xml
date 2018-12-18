@@ -159,9 +159,12 @@
 		of DetNet, as long as the necessary resources can be reserved.  Reservations
 		can be made by the application itself, via network management, by an
 		application's controller, or by other means, e.g., a dynamic control plane
-		(e.g., <xref target="RFC2205"/>). Network nodes supporting DetNet flows have to
-		implement some of the DetNet capabilities (not necessarily all) in order to
-		treat DetNet flows such that their QoS requirements are met.
+		(e.g., <xref target="RFC2205"/>). Network nodes of a DetNet domain, i.e.,
+		DetNet nodes have to implement DetNet capabilities in order to treat 
+		DetNet flows such that their QoS requirements are met. DetNet nodes can
+		be interconnected with different sub-network technologies 
+		(<xref target="sec_dt_dp"/>), where the nodes of the subnet are not
+		DetNet aware (<xref target="netref"/>).
 	  </t><t>
 		Many applications that are intended to be served by Deterministic Networking require the ability
 		to synchronize the clocks in end systems to a sub-microsecond accuracy.  Some
@@ -673,7 +676,8 @@ title="Packet replication and elimination">
 			Explicit routes can be established in various ways, e.g., with  
 			RSVP-TE <xref target="RFC3209"/>, with Segment Routing (SR)
 			<xref target="RFC8402"/>, via a Software 
-			Defined Networking approach <xref target="RFC7426"/>, with IS-IS 
+			Defined Networking approach <xref target="RFC7426"/>, 
+			<xref target="RFC8453"/>, and <xref target="RFC8453"/>, with IS-IS 
 			<xref target="RFC7813"/>, etc.
 			Explicit routes are typically used in MPLS TE LSPs.
 		</t><t>
@@ -728,10 +732,10 @@ title="Packet replication and elimination">
                   </t>
               </list>
           </t><t>
-              Traffic policing functions (e.g., <xref target="RFC2475"/>) are used
-			  to avoid the starvation of non-DetNet traffic. 
-			  Thus, the net effect of the presence of DetNet flows in a network on the non-DetNet
-              flows is primarily a reduction in the available bandwidth.
+              Starvation of non-DetNet traffic must be avoided, e.g., by traffic
+			  policing functions (e.g., <xref target="RFC2475"/>). Thus, the net
+			  effect of the presence of DetNet flows in a network on the 
+			  non-DetNet flows is primarily a reduction in the available bandwidth.			  
           </t>
       </section>
       <section anchor="FaultMitigation" title="Fault Mitigation">
@@ -1157,7 +1161,20 @@ title="Categorization of end systems">
                   DetNet flows or to classes of DetNet flows.  The requirements of each reservation have to be
                   translated into the parameters that control each DetNet system's
                   queuing, shaping, and scheduling functions and delivered to the DetNet nodes and end systems.
-               </t>
+               </t><t>
+			      All nodes in a DetNet domain are expected to support the data
+				  behavior required to deliver a particular DetNet service. If 
+				  a node itself is not DetNet service aware, the DetNet nodes 
+				  that are adjacent to such non-DetNet aware nodes must ensure
+				  that the non-DetNet aware node is provisioned to appropriately
+				  support the DetNet service. For example, an IEEE 802.1 TSN
+				  node may be used to interconnect DetNet aware nodes, and these
+				  DetNet nodes can map DetNet flows to 802.1 TSN flows. Another
+				  example, an MPLS-TE or TP domain may be used to interconnect
+				  DetNet aware nodes, and these DetNet nodes can map DetNet
+				  flows to TE LSPs which can provide the QoS requirements of the
+				  DetNet service. 
+			   </t>
           </section>
           <section anchor="Incomplete" title="Incomplete Networks">
               <t>
@@ -1188,7 +1205,8 @@ title="Categorization of end systems">
          of three planes, a (User) Application Plane, a Controller Plane, and a
          Network Plane, which echoes that of Figure 1 of
          <xref target="RFC7426"> Software-Defined Networking (SDN): 
-         Layers and Architecture Terminology</xref>.:
+         Layers and Architecture Terminology</xref>, and the Controllers
+		 identified in <xref target="RFC8453"/> and <xref target="RFC7149"/>.
 		</t>
 
 <section anchor="appplane" title="The Application Plane">
@@ -1703,12 +1721,14 @@ ETH-ID           |      +-----+----+       |  \ Recognize
 	  <?rfc include='reference.RFC.5921'?>
 	  <?rfc include='reference.RFC.6372'?>
 	  <?rfc include='reference.RFC.6658'?>
+	  <?rfc include='reference.RFC.7149'?>
 	  <?rfc include='reference.RFC.7384'?>
 	  <?rfc include='reference.RFC.7426'?>
 	  <?rfc include='reference.RFC.7554'?>
 	  <?rfc include='reference.RFC.7813'?>
-	  <?rfc include='reference.RFC.8402'?>
 	  <?rfc include='reference.RFC.8227'?>
+	  <?rfc include='reference.RFC.8402'?>
+	  <?rfc include='reference.RFC.8453'?>
 	  
 	  <reference anchor="IEC62439-3-2016"
 		target="https://webstore.iec.ch/publication/24447">
