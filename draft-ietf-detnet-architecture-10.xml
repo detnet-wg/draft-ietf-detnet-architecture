@@ -923,10 +923,10 @@ End System        Node         Node           Node        End System
 +----------+   +---+ +---+   +--------+    +---------+   +----------+
 |Forwarding|   |Fwd| |Fwd|   |  Fwd   |    |Fwd| |Fwd|   |Forwarding|
 +-------.--+   +-.-+ +-.-+   +--.----.+    +-.-+ +-.-+   +---.------+
-        :  Link  :    /  ,-----. \   :  Link   :    /  ,-----.  \
-        +........+    +-[  Sub  ]-+  +.........+    +-[  Sub  ]-+
-                        [Network]                     [Network] 
-                         `-----'                       `-----'
+        :  Link  :    /  ,-----. \   : Link  :    /  ,-----.  \
+        +........+    +-[  Sub  ]-+  +.......+    +-[  Sub  ]-+
+                        [Network]                   [Network] 
+                         `-----'                     `-----'
 ]]></artwork>
 </figure>
 
