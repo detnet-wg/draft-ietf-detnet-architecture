@@ -355,7 +355,7 @@
 			Three techniques are used by DetNet to provide these qualities of service:
 			<list style="symbols">
 				<t>
-					Congestion protection (<xref target="Zero"/>).
+					 Resource allocation (<xref target="Zero"/>).
 				</t><t>
 					Service protection (<xref target="srvcprot"/>).
 				</t><t>
@@ -363,22 +363,23 @@
 				</t>
 			</list>
 		</t><t>
-			Congestion protection operates by allocating resources along the path of
-			a DetNet flow, e.g., buffer space or link bandwidth. Congestion protection
-			greatly reduces, or even eliminates entirely, packet loss due to output packet
-			congestion within the network, but it can only be
-			supplied to a DetNet flow that is limited at the source to a maximum
-			packet size and transmission rate. Note that congestion protection
-			provided  via congestion detection and notification  is explicitly excluded
-			from consideration in DetNet, as it serves a different set of applications.
+            Resource allocation operates by assigning resources, e.g., buffer
+            space or link bandwidth, to a DetNet flow (or flow aggregate) along
+            its path. Resource allocation greatly reduces, or even eliminates
+            entirely, packet loss due to output packet contention within the
+            network, but it can only be supplied to a DetNet flow that is limited
+            at the source to a maximum packet size and transmission rate. Note
+            that congestion control provided via congestion detection and
+            notification <xref target="RFC3168"/> is explicitly excluded from 
+			consideration in DetNet, as it serves a different set of applications.
 		</t><t>
-			Congestion protection addresses two of the DetNet QoS
-			requirements: latency and packet loss. Given that DetNet nodes
-			have a finite amount of buffer space, congestion protection
-			necessarily results in a maximum end-to-end latency.  It also addresses the largest
-			contribution to packet loss, which is buffer congestion.
+            Resource allocation addresses two of the DetNet QoS requirements:
+            latency and packet loss.  Given that DetNet nodes have a finite
+            amount of buffer space, Resource allocation necessarily results in
+            a maximum end-to-end latency.  It also addresses contention related
+            packet loss. 
 		</t><t>
-			After congestion, the most important contributions to packet loss are typically from
+			Other important contribution to packet loss are
 			random media errors and equipment failures.  Service protection is the name for the
 			mechanisms used by DetNet to address these losses.  The mechanisms employed are
 			constrained by the requirement to meet the users' latency requirements.
@@ -1697,6 +1698,7 @@ ETH-ID           |      +-----+----+       |  \ Recognize
 	  <?rfc include='reference.I-D.ietf-detnet-security'?>
 	  <?rfc include='reference.RFC.2205'?>
 	  <?rfc include='reference.RFC.2475'?>
+	  <?rfc include='reference.RFC.3168'?>	 
 	  <?rfc include='reference.RFC.3209'?>
       <?rfc include='reference.RFC.3550'?>
 	  <?rfc include='reference.RFC.4655'?>
