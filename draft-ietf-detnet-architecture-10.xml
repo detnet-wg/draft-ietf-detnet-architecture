@@ -159,9 +159,8 @@
 		of DetNet, as long as the necessary resources can be reserved.  Reservations
 		can be made by the application itself, via network management, by an
 		application's controller, or by other means, e.g., a dynamic control plane
-		(e.g., <xref target="RFC2205"/>). Network nodes of a DetNet domain, i.e.,
-		DetNet nodes have to implement DetNet capabilities in order to treat 
-		DetNet flows such that their QoS requirements are met. DetNet nodes can
+		(e.g., <xref target="RFC2205"/>). QoS requirements of DetNet flows can be met if all
+		network nodes in a DetNet domain implement DetNet capabilities. DetNet nodes can
 		be interconnected with different sub-network technologies 
 		(<xref target="sec_dt_dp"/>), where the nodes of the subnet are not
 		DetNet aware (<xref target="netref"/>).
@@ -415,7 +414,7 @@
 					front or the end of Ethernet frames. <xref target="RFC8227"/> provides 
 					another example in the context of MPLS.
 				</t><t>
-					Resource allocation alone is offered by IEEE 802.1 Audio Video bridging
+					Resource allocation alone was originally offered by IEEE 802.1 Audio Video bridging
 					<xref target="IEEE802.1BA"/>.  As long as the network suffers no failures,
 					packet loss due to output packet contention can be eliminated through the use of a reservation protocol (e.g., Multiple Stream Registration Protocol <xref target="IEEE802.1Q-2018"/>), shapers in every bridge, and proper dimensioning.
 				</t><t>
@@ -627,7 +626,7 @@ title="Packet replication and elimination">
 			or misrouted data is handled just the same as the equipment failures
 			that are handled by typical routing and bridging protocols.
 		</t><t>
-			If packet replication and elimination is used over paths providing resource  allocation
+			If packet replication and elimination is used over paths with resource  allocation
 			(<xref target="Zero"/>), and member flows that take different-length paths
 			through the network are combined, a merge
 			point may require extra buffering to equalize the delays over the different paths.  This
@@ -1047,14 +1046,14 @@ title="Categorization of end systems">
                           |  sub-layer
                          / \  aware ?
                +--------<   >-------------+
-       t-aware |         \ /              | s-aware
+       f-aware |         \ /              | s-aware
                |          v               |
                |          | both          |
                |          |               |
-       DetNet t-aware     |        DetNet s-aware
+       DetNet f-aware     |        DetNet s-aware
          End system       |         End system
                           v
-                    DetNet st-aware
+                    DetNet sf-aware
                       End system
 ]]></artwork>
 </figure>
@@ -1063,9 +1062,9 @@ title="Categorization of end systems">
 		Note some known use case examples for end systems:
 	     <list style="symbols">
 			<t> DetNet unaware: The classic case requiring service proxies.</t>
-			<t> DetNet t-aware: A DetNet forwarding sub-layer aware system. It knows about some TSN functions (e.g., reservation), but not about service protection. </t>
+			<t> DetNet f-aware: A DetNet forwarding sub-layer aware system. It knows about some TSN functions (e.g., reservation), but not about service protection. </t>
 			<t> DetNet s-aware: A DetNet service sub-layer aware system. It supplies sequence numbers, but doesn't know about resource allocation. </t>
-			<t> DetNet st-aware: A full functioning DetNet end system, it has DetNet functionalities and usually the same forwarding paradigm as the connected DetNet domain. It can be treated as an integral part of the DetNet domain. </t>
+			<t> DetNet sf-aware: A full functioning DetNet end system, it has DetNet functionalities and usually the same forwarding paradigm as the connected DetNet domain. It can be treated as an integral part of the DetNet domain. </t>
 		</list>
 		</t> 
 	    </section>
@@ -1094,9 +1093,9 @@ title="Categorization of end systems">
                   A DetNet flow can have different formats while its packets are forwarded between the peer end systems. Therefore, the following possible types / formats of a DetNet flow are distinguished in this document:
                   <list style="symbols">
                       <t> App-flow: native format of the data carried over a DetNet flow. It does not contain any DetNet related attributes.</t>
-                      <t> DetNet-t-flow: specific format of a DetNet flow. Only requires the resource allocation features provided by the DetNet forwarding sub-layer. </t>
-                      <t> DetNet-s-flow: specific format of a DetNet flow. Only requires the service protection feature ensured by the DetNet service sub-layer. </t>
-                      <t> DetNet-st-flow: specific format of a DetNet flow. It requires both DetNet service
+                      <t> DetNet-f-flow: specific format of a DetNet flow. It only requires the resource allocation features provided by the DetNet forwarding sub-layer. </t>
+                      <t> DetNet-s-flow: specific format of a DetNet flow. It only requires the service protection feature ensured by the DetNet service sub-layer. </t>
+                      <t> DetNet-sf-flow: specific format of a DetNet flow. It requires both DetNet service
                           sub-layer and DetNet forwarding sub-layer functions during forwarding. </t>
                   </list>
               </t>
@@ -1502,7 +1501,7 @@ title="Packet with multiple Flow-IDs">
 			<t>created by a domain specific function or </t>
 			<t>derived from the Flow-ID added to the App-flow. </t>
 		</list>
-		The Flow-ID must be unique inside a given domain. Note that the Flow-ID added to the App-flow is still present in the packet, but network nodes may lack the function to recognize it; that's why the additional Flow-ID is added.
+		The Flow-ID must be unique inside a given domain. Note that the Flow-ID added to the App-flow is still present in the packet, but some nodes may lack the function to recognize it; that's why the additional Flow-ID is added.
 		</t>
 		</section>
 
