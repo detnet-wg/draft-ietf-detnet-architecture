@@ -750,10 +750,35 @@ title="Packet replication and elimination">
               It is also essential that filters and service remarking be employed at the network edge
               to prevent non-DetNet
               packets from being mistaken for DetNet packets, and thus impinging on the resources
-              allocated to DetNet packets.
+              allocated to DetNet packets. In particular, sending DetNet traffic
+			  into networks that have not been provisioned in advance to handle 
+			  that DetNet traffic has to be treated as a fault.  The use of 
+			  egress traffic filters, or equivalent mechanisms, to prevent this
+			  from happening are strongly recommended at the edges of a DetNet 
+			  networks and DetNet supporting networks.  In this context, the 
+			  term 'provisioned' has a broad meaning, e.g., provisioning could be
+			  performed via an administrative decision that the downstream network
+			  has the available capacity to carry the DetNet traffic that is being
+			  sent into it.
           </t><t>
-              There exist techniques, at present and/or in various stages of standardization, that can
-              perform these fault mitigation tasks that deliver a high probability that misbehaving
+              Note that the sending of non-congestion-controlled DetNet traffic, 
+			  i.e., DetNet traffic that does not comply with <xref target="RFC2914"/> 
+			  (non-elastic DetNet traffic) into a network that is not
+			  provisioned to handle that DetNet traffic has to be prevented in
+			  addition to being treated as a fault.  DetNet traffic that is not
+			  known to be congestion controlled has to be treated as 
+			  non-congestion-controlled DetNet traffic for this requirement.  
+			  PRF generated DetNet member flows need to be treated as
+			  non-congestion-controlled even if the original DetNet compound
+			  flow is congestion-controlled because PREOF can remove congestion
+			  indications at the PEF and thereby hide such indications (e.g.,
+			  drops, ECN markings, increased latency) from endpoints.
+          </t><t>
+              The mechanisms to support these requirements are both data plane
+			  and implementation specific.  Data plane specific solutions will 
+			  be specified in the relevant data plane solution document. There 
+			  also exist techniques, at present and/or in various stages of 
+              standardization, that can support these fault mitigation tasks that deliver a high probability that misbehaving
               systems will have zero impact on well-behaved DetNet flows, except of course, for
               the receiving interface(s) immediately downstream of the misbehaving device.
               Examples of such techniques include traffic policing functions (e.g.,
@@ -1713,6 +1738,7 @@ ETH-ID           |      +-----+----+       |  \ Recognize
 	  <?rfc include='reference.I-D.ietf-detnet-security'?>
 	  <?rfc include='reference.RFC.2205'?>
 	  <?rfc include='reference.RFC.2475'?>
+	  <?rfc include='reference.RFC.2914'?>
 	  <?rfc include='reference.RFC.3168'?>	 
 	  <?rfc include='reference.RFC.3209'?>
       <?rfc include='reference.RFC.3550'?>
