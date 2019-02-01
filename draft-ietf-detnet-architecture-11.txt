@@ -5,11 +5,11 @@
 DetNet                                                           N. Finn
 Internet-Draft                                                    Huawei
 Intended status: Standards Track                              P. Thubert
-Expires: August 3, 2019                                            Cisco
+Expires: August 5, 2019                                            Cisco
                                                                 B. Varga
                                                                J. Farkas
                                                                 Ericsson
-                                                        January 30, 2019
+                                                        February 1, 2019
 
 
                  Deterministic Networking Architecture
@@ -46,16 +46,16 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on August 3, 2019.
+   This Internet-Draft will expire on August 5, 2019.
 
 
 
 
 
 
-Finn, et al.             Expires August 3, 2019                 [Page 1]
+Finn, et al.             Expires August 5, 2019                 [Page 1]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 Copyright Notice
@@ -105,13 +105,13 @@ Table of Contents
        4.3.1.  DetNet flow types . . . . . . . . . . . . . . . . . .  24
        4.3.2.  Source transmission behavior  . . . . . . . . . . . .  25
        4.3.3.  Incomplete Networks . . . . . . . . . . . . . . . . .  26
-     4.4.  Traffic Engineering for DetNet  . . . . . . . . . . . . .  27
+     4.4.  Traffic Engineering for DetNet  . . . . . . . . . . . . .  26
 
 
 
-Finn, et al.             Expires August 3, 2019                 [Page 2]
+Finn, et al.             Expires August 5, 2019                 [Page 2]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
        4.4.1.  The Application Plane . . . . . . . . . . . . . . . .  27
@@ -165,9 +165,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                 [Page 3]
+Finn, et al.             Expires August 5, 2019                 [Page 3]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    cases, prevent existing Quality of Service (QoS) mechanisms from
@@ -221,9 +221,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                 [Page 4]
+Finn, et al.             Expires August 5, 2019                 [Page 4]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
            are strictly relative to each other, not absolutes; a DetNet
@@ -277,9 +277,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                 [Page 5]
+Finn, et al.             Expires August 5, 2019                 [Page 5]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    DetNet service sub-layer
@@ -333,9 +333,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                 [Page 6]
+Finn, et al.             Expires August 5, 2019                 [Page 6]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
            DetNet domain.  The number of packet copies sent to the next
@@ -389,9 +389,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                 [Page 7]
+Finn, et al.             Expires August 5, 2019                 [Page 7]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    o  Packet loss ratio, under various assumptions as to the operational
@@ -423,10 +423,10 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
    its path.  Resource allocation greatly reduces, or even eliminates
    entirely, packet loss due to output packet contention within the
    network, but it can only be supplied to a DetNet flow that is limited
-   at the source to a maximum packet size and transmission rate.  Note
-   that congestion control provided via congestion detection and
-   notification [RFC3168] is explicitly excluded from consideration in
-   DetNet, as it serves a different set of applications.
+   at the source to a maximum packet size and transmission rate.  As
+   DetNet provides allocated resources (including provisioned capacity)
+   to DetNet flows the use of transport layer congestion control
+   [RFC2914] by App-flows is explicitly not required.
 
    Resource allocation addresses two of the DetNet QoS requirements:
    latency and packet loss.  Given that DetNet nodes have a finite
@@ -445,9 +445,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                 [Page 8]
+Finn, et al.             Expires August 5, 2019                 [Page 8]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    protection against random media errors, packet replication and
@@ -501,9 +501,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                 [Page 9]
+Finn, et al.             Expires August 5, 2019                 [Page 9]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    There are any number of methods in use, defined, or in progress for
@@ -524,8 +524,8 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
    contention within a DetNet node as a cause of packet loss.  This can
    be achieved only by the provision of sufficient buffer storage at
    each node through the network to ensure that no packets are dropped
-   due to a lack of buffer storage.  Note that a DetNet flow cannot be
-   throttled, i.e., its transmission rate cannot be reduced via explicit
+   due to a lack of buffer storage.  Note that App-flows are generally
+   not expected to be responsive to implicit [RFC2914] or explicit
    congestion notification [RFC3168].
 
    Ensuring adequate buffering requires, in turn, that the source, and
@@ -557,9 +557,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 10]
+Finn, et al.             Expires August 5, 2019                [Page 10]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    legacy serial links are usually slow (in the order of Kbps) compared
@@ -613,9 +613,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 11]
+Finn, et al.             Expires August 5, 2019                [Page 11]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    DetNet Packet Ordering Functionality (POF) (Section 3.2.2.2) can be
@@ -669,9 +669,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 12]
+Finn, et al.             Expires August 5, 2019                [Page 12]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    Some service protection mechanisms rely on switching from one flow to
@@ -725,9 +725,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 13]
+Finn, et al.             Expires August 5, 2019                [Page 13]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    compound flow will not exceed its contracted bandwidth even after one
@@ -781,9 +781,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 14]
+Finn, et al.             Expires August 5, 2019                [Page 14]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    service protection over explicit routes.  As described in
@@ -837,9 +837,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 15]
+Finn, et al.             Expires August 5, 2019                [Page 15]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 3.3.2.  Fault Mitigation
@@ -865,17 +865,15 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
    administrative decision that the downstream network has the available
    capacity to carry the DetNet traffic that is being sent into it.
 
-   Note that the sending of non-congestion-controlled DetNet traffic,
-   i.e., DetNet traffic that does not comply with [RFC2914] (non-elastic
-   DetNet traffic) into a network that is not provisioned to handle that
-   DetNet traffic has to be prevented in addition to being treated as a
-   fault.  DetNet traffic that is not known to be congestion controlled
-   has to be treated as non-congestion-controlled DetNet traffic for
-   this requirement.  PRF generated DetNet member flows need to be
-   treated as non-congestion-controlled even if the original DetNet
-   compound flow is congestion-controlled because PREOF can remove
-   congestion indications at the PEF and thereby hide such indications
-   (e.g., drops, ECN markings, increased latency) from endpoints.
+   Note that the sending of App-flows that do not use transport layer
+   congestion control per [RFC2914] into a network that is not
+   provisioned to handle such DetNet traffic has to be treated as a
+   fault and prevented.  PRF generated DetNet member flows also need to
+   be treated as not using transport layer congestion control even if
+   the original App-flow supports transport layer congestion control
+   because PREOF can remove congestion indications at the PEF and
+   thereby hide such indications (e.g., drops, ECN markings, increased
+   latency) from end systems.
 
    The mechanisms to support these requirements are both data plane and
    implementation specific.  Data plane specific solutions will be
@@ -893,9 +891,11 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 16]
+
+
+Finn, et al.             Expires August 5, 2019                [Page 16]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 4.  DetNet Architecture
@@ -949,9 +949,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 17]
+Finn, et al.             Expires August 5, 2019                [Page 17]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
            sub-layer is not needed if a higher layer protocol is
@@ -1005,9 +1005,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 18]
+Finn, et al.             Expires August 5, 2019                [Page 18]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
            those packets the original DetNet packets from the compound
@@ -1061,9 +1061,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 19]
+Finn, et al.             Expires August 5, 2019                [Page 19]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    to the DetNet forwarding sub-layer, "Service" and "Svc" refer to the
@@ -1117,9 +1117,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 20]
+Finn, et al.             Expires August 5, 2019                [Page 20]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    There are many valid options to create a data plane solution for
@@ -1173,9 +1173,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 21]
+Finn, et al.             Expires August 5, 2019                [Page 21]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    DetNet                                                     DetNet
@@ -1229,9 +1229,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 22]
+Finn, et al.             Expires August 5, 2019                [Page 22]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 4.2.  DetNet systems
@@ -1285,9 +1285,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 23]
+Finn, et al.             Expires August 5, 2019                [Page 23]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    o  DetNet unaware: The classic case requiring service proxies.
@@ -1341,9 +1341,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 24]
+Finn, et al.             Expires August 5, 2019                [Page 24]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    o  DetNet-s-flow: specific format of a DetNet flow.  It only requires
@@ -1397,18 +1397,18 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 25]
+Finn, et al.             Expires August 5, 2019                [Page 25]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
-   There is no provision in DetNet for throttling DetNet flows, i.e.,
-   the transmission rate cannot be reduced via explicit congestion
-   notification [RFC3168].  The assumption is that a DetNet flow, to be
-   useful, must be delivered in its entirety.  That is, while any useful
-   application is written to expect a certain number of lost packets,
-   the real-time applications of interest to DetNet demand that the loss
-   of data due to the network is a rare event.
+   There is no expectation in DetNet for App-flows to be responsive to
+   implicit [RFC2914] or explicit congestion notification [RFC3168].
+   The assumption is that a DetNet flow, to be useful, must be delivered
+   in its entirety.  That is, while any useful application is written to
+   expect a certain number of lost packets, the real-time applications
+   of interest to DetNet demand that the loss of data due to the network
+   is a rare event.
 
    Although DetNet strives to minimize the changes required of an
    application to allow it to shift from a special-purpose digital
@@ -1417,13 +1417,12 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
    reservation of resources before the application starts.  In the first
    place, a network cannot deliver finite latency and practically zero
    packet loss to an arbitrarily high offered load.  Secondly, achieving
-   practically zero packet loss for unthrottled (though bandwidth
-   limited) DetNet flows means that DetNet nodes have to dedicate buffer
-   resources to specific DetNet flows or to classes of DetNet flows.
-   The requirements of each reservation have to be translated into the
-   parameters that control each DetNet system's queuing, shaping, and
-   scheduling functions and delivered to the DetNet nodes and end
-   systems.
+   practically zero packet loss for DetNet flows means that DetNet nodes
+   have to dedicate buffer resources to specific DetNet flows or to
+   classes of DetNet flows.  The requirements of each reservation have
+   to be translated into the parameters that control each DetNet
+   system's queuing, shaping, and scheduling functions and delivered to
+   the DetNet nodes and end systems.
 
    All nodes in a DetNet domain are expected to support the data
    behavior required to deliver a particular DetNet service.  If a node
@@ -1446,23 +1445,19 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
    DetNet intermediate node for a DetNet flow.  This extra buffering may
    increase latency and/or jitter.
 
-
-
-
-
-
-
-
-Finn, et al.             Expires August 3, 2019                [Page 26]
-
-Internet-Draft    Deterministic Networking Architecture     January 2019
-
-
 4.4.  Traffic Engineering for DetNet
 
    Traffic Engineering Architecture and Signaling (TEAS) [TEAS] defines
    traffic-engineering architectures for generic applicability across
    packet and non-packet networks.  From a TEAS perspective, Traffic
+
+
+
+Finn, et al.             Expires August 5, 2019                [Page 26]
+
+Internet-Draft    Deterministic Networking Architecture    February 2019
+
+
    Engineering (TE) refers to techniques that enable operators to
    control how specific traffic flows are treated within their networks.
 
@@ -1506,16 +1501,18 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
    refers to any device operating in that plane, whether is it a Path
    Computation Element (PCE) [RFC4655], or a Network Management entity
    (NME), or a distributed control plane.  The CPF is a core element of
-
-
-
-Finn, et al.             Expires August 3, 2019                [Page 27]
-
-Internet-Draft    Deterministic Networking Architecture     January 2019
-
-
    a controller, in charge of computing Deterministic paths to be
    applied in the Network Plane.
+
+
+
+
+
+
+Finn, et al.             Expires August 5, 2019                [Page 27]
+
+Internet-Draft    Deterministic Networking Architecture    February 2019
+
 
    A (Northbound) Service Interface enables applications in the
    Application Plane to communicate with the entities in the Controller
@@ -1565,9 +1562,12 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 28]
+
+
+
+Finn, et al.             Expires August 5, 2019                [Page 28]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
        End                                                     End
@@ -1621,9 +1621,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 29]
+Finn, et al.             Expires August 5, 2019                [Page 29]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    DetNet node to the end-to-end latency, to compute the amount of
@@ -1677,9 +1677,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 30]
+Finn, et al.             Expires August 5, 2019                [Page 30]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    "F2").  As a result, data flow specific access ("access-A + F1" and
@@ -1733,9 +1733,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 31]
+Finn, et al.             Expires August 5, 2019                [Page 31]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 4.7.1.  Exporting flow identification
@@ -1789,9 +1789,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 32]
+Finn, et al.             Expires August 5, 2019                [Page 32]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    In any of the above cases, it is possible that an existing DetNet
@@ -1845,9 +1845,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 33]
+Finn, et al.             Expires August 5, 2019                [Page 33]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    o  created by a domain specific function or
@@ -1901,9 +1901,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 34]
+Finn, et al.             Expires August 5, 2019                [Page 34]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    to "ETH-1" node.  Ethernet switch "ETH-1" can recognize the data flow
@@ -1957,9 +1957,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 35]
+Finn, et al.             Expires August 5, 2019                [Page 35]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    encoding the sequence number information must similarly be altered or
@@ -2013,9 +2013,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 36]
+Finn, et al.             Expires August 5, 2019                [Page 36]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 5.  Security Considerations
@@ -2069,9 +2069,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 37]
+Finn, et al.             Expires August 5, 2019                [Page 37]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 8.  Acknowledgements
@@ -2125,9 +2125,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 38]
+Finn, et al.             Expires August 5, 2019                [Page 38]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    [IEC62439-3-2016]
@@ -2181,9 +2181,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 39]
+Finn, et al.             Expires August 5, 2019                [Page 39]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    [IEEE802.1TSNTG]
@@ -2237,9 +2237,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 40]
+Finn, et al.             Expires August 5, 2019                [Page 40]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    [RFC4655]  Farrel, A., Vasseur, J., and J. Ash, "A Path Computation
@@ -2293,9 +2293,9 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 41]
+Finn, et al.             Expires August 5, 2019                [Page 41]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    [RFC8227]  Cheng, W., Wang, L., Li, H., van Helvoort, H., and J.
@@ -2349,9 +2349,9 @@ Authors' Addresses
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 42]
+Finn, et al.             Expires August 5, 2019                [Page 42]
 
-Internet-Draft    Deterministic Networking Architecture     January 2019
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    Balazs Varga
@@ -2405,4 +2405,4 @@ Internet-Draft    Deterministic Networking Architecture     January 2019
 
 
 
-Finn, et al.             Expires August 3, 2019                [Page 43]
+Finn, et al.             Expires August 5, 2019                [Page 43]

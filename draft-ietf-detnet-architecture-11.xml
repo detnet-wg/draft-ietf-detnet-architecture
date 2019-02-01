@@ -370,10 +370,12 @@
             its path. Resource allocation greatly reduces, or even eliminates
             entirely, packet loss due to output packet contention within the
             network, but it can only be supplied to a DetNet flow that is limited
-            at the source to a maximum packet size and transmission rate. Note
-            that congestion control provided via congestion detection and
-            notification <xref target="RFC3168"/> is explicitly excluded from 
-			consideration in DetNet, as it serves a different set of applications.
+            at the source to a maximum packet size and transmission rate. 
+			
+			As DetNet provides allocated resources (including provisioned capacity)
+			to DetNet flows the use of transport layer congestion control
+			<xref target="RFC2914"/> by App-flows is explicitly not required.
+			
 		</t><t>
             Resource allocation addresses two of the DetNet QoS requirements:
             latency and packet loss. Given that DetNet nodes have a finite
@@ -447,8 +449,8 @@
 			This can be achieved only by the provision of
 			sufficient buffer storage at each node through the network to ensure that no
 			packets are dropped due to a lack of buffer storage. 
-			Note that a DetNet flow cannot be throttled, i.e., its transmission rate cannot be
-			reduced via explicit congestion notification <xref target="RFC3168"/>.
+			Note that App-flows are  generally not expected to be responsive to implicit <xref target="RFC2914"/> or explicit congestion notification <xref target="RFC3168"/>.
+
 		</t><t>
 			Ensuring adequate buffering requires, in turn, that the source, and every DetNet
 			node along the path to the destination (or nearly every node, see
@@ -761,18 +763,17 @@ title="Packet replication and elimination">
 			  has the available capacity to carry the DetNet traffic that is being
 			  sent into it.
           </t><t>
-              Note that the sending of non-congestion-controlled DetNet traffic, 
-			  i.e., DetNet traffic that does not comply with <xref target="RFC2914"/> 
-			  (non-elastic DetNet traffic) into a network that is not
-			  provisioned to handle that DetNet traffic has to be prevented in
-			  addition to being treated as a fault.  DetNet traffic that is not
-			  known to be congestion controlled has to be treated as 
-			  non-congestion-controlled DetNet traffic for this requirement.  
-			  PRF generated DetNet member flows need to be treated as
-			  non-congestion-controlled even if the original DetNet compound
-			  flow is congestion-controlled because PREOF can remove congestion
-			  indications at the PEF and thereby hide such indications (e.g.,
-			  drops, ECN markings, increased latency) from endpoints.
+  
+   			  Note that the sending of App-flows that do not use transport layer
+			  congestion control per <xref target="RFC2914"/> into a network that
+			  is not provisioned to handle such DetNet traffic has to be treated
+			  as a fault and prevented. PRF generated DetNet member flows also
+			  need to be treated as not using transport layer congestion control
+			  even if the original App-flow supports transport layer congestion
+			  control because PREOF can remove congestion indications at the PEF
+			  and thereby hide such indications (e.g., drops, ECN markings,
+			  increased latency) from end systems.
+			  
           </t><t>
               The mechanisms to support these requirements are both data plane
 			  and implementation specific.  Data plane specific solutions will 
@@ -1165,9 +1166,9 @@ title="Categorization of end systems">
                   no purpose.  Those other DetNet flows have their own dedicated resources, on the
                   assumption that all DetNet flows can use all of their resources over a long
                   period of time.
+	  
               </t><t>
-                  There is no provision in DetNet for throttling DetNet flows, i.e.,
-                  the transmission rate cannot be reduced via explicit congestion notification <xref target="RFC3168"/>. The assumption
+                  There is no expectation in DetNet for App-flows to be responsive to implicit <xref target="RFC2914"/> or explicit congestion notification <xref target="RFC3168"/>. The assumption
                   is that a DetNet flow, to be useful, must be delivered in its entirety.  That
                   is, while any useful application is written to expect a certain number of lost
                   packets, the real-time applications of interest to DetNet demand that the loss of
@@ -1180,7 +1181,7 @@ title="Categorization of end systems">
                   of resources before the application starts.
                   In the first place, a network cannot deliver finite latency and practically zero
                   packet loss to an arbitrarily high offered load.  Secondly, achieving
-                  practically zero packet loss for unthrottled (though bandwidth limited) DetNet flows
+                  practically zero packet loss for  DetNet flows
                   means that DetNet nodes have to dedicate buffer resources to specific
                   DetNet flows or to classes of DetNet flows.  The requirements of each reservation have to be
                   translated into the parameters that control each DetNet system's
