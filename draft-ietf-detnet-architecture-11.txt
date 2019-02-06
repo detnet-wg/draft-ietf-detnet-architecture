@@ -5,11 +5,11 @@
 DetNet                                                           N. Finn
 Internet-Draft                                                    Huawei
 Intended status: Standards Track                              P. Thubert
-Expires: August 5, 2019                                            Cisco
+Expires: August 10, 2019                                           Cisco
                                                                 B. Varga
                                                                J. Farkas
                                                                 Ericsson
-                                                        February 1, 2019
+                                                        February 6, 2019
 
 
                  Deterministic Networking Architecture
@@ -46,14 +46,14 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on August 5, 2019.
+   This Internet-Draft will expire on August 10, 2019.
 
 
 
 
 
 
-Finn, et al.             Expires August 5, 2019                 [Page 1]
+Finn, et al.             Expires August 10, 2019                [Page 1]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Finn, et al.             Expires August 5, 2019                 [Page 2]
+Finn, et al.             Expires August 10, 2019                [Page 2]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -165,7 +165,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                 [Page 3]
+Finn, et al.             Expires August 10, 2019                [Page 3]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -221,7 +221,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                 [Page 4]
+Finn, et al.             Expires August 10, 2019                [Page 4]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -277,7 +277,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                 [Page 5]
+Finn, et al.             Expires August 10, 2019                [Page 5]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -333,7 +333,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                 [Page 6]
+Finn, et al.             Expires August 10, 2019                [Page 6]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -389,7 +389,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                 [Page 7]
+Finn, et al.             Expires August 10, 2019                [Page 7]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -445,7 +445,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                 [Page 8]
+Finn, et al.             Expires August 10, 2019                [Page 8]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -501,7 +501,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                 [Page 9]
+Finn, et al.             Expires August 10, 2019                [Page 9]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -557,7 +557,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 10]
+Finn, et al.             Expires August 10, 2019               [Page 10]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -613,7 +613,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 11]
+Finn, et al.             Expires August 10, 2019               [Page 11]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -669,7 +669,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 12]
+Finn, et al.             Expires August 10, 2019               [Page 12]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -725,7 +725,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 13]
+Finn, et al.             Expires August 10, 2019               [Page 13]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -781,7 +781,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 14]
+Finn, et al.             Expires August 10, 2019               [Page 14]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -837,7 +837,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 15]
+Finn, et al.             Expires August 10, 2019               [Page 15]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -893,7 +893,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 16]
+Finn, et al.             Expires August 10, 2019               [Page 16]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -949,7 +949,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 17]
+Finn, et al.             Expires August 10, 2019               [Page 17]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -1005,7 +1005,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 18]
+Finn, et al.             Expires August 10, 2019               [Page 18]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -1061,7 +1061,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 19]
+Finn, et al.             Expires August 10, 2019               [Page 19]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -1117,7 +1117,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 20]
+Finn, et al.             Expires August 10, 2019               [Page 20]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -1173,7 +1173,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 21]
+Finn, et al.             Expires August 10, 2019               [Page 21]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -1229,7 +1229,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 22]
+Finn, et al.             Expires August 10, 2019               [Page 22]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -1285,7 +1285,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 23]
+Finn, et al.             Expires August 10, 2019               [Page 23]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -1341,7 +1341,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 24]
+Finn, et al.             Expires August 10, 2019               [Page 24]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -1397,7 +1397,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 25]
+Finn, et al.             Expires August 10, 2019               [Page 25]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -1453,7 +1453,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 26]
+Finn, et al.             Expires August 10, 2019               [Page 26]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -1509,7 +1509,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 27]
+Finn, et al.             Expires August 10, 2019               [Page 27]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -1565,7 +1565,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 28]
+Finn, et al.             Expires August 10, 2019               [Page 28]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -1621,7 +1621,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 29]
+Finn, et al.             Expires August 10, 2019               [Page 29]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -1677,7 +1677,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 30]
+Finn, et al.             Expires August 10, 2019               [Page 30]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -1733,7 +1733,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 31]
+Finn, et al.             Expires August 10, 2019               [Page 31]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -1789,7 +1789,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 32]
+Finn, et al.             Expires August 10, 2019               [Page 32]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -1845,7 +1845,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 33]
+Finn, et al.             Expires August 10, 2019               [Page 33]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -1901,7 +1901,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 34]
+Finn, et al.             Expires August 10, 2019               [Page 34]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -1957,7 +1957,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 35]
+Finn, et al.             Expires August 10, 2019               [Page 35]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -2013,7 +2013,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 36]
+Finn, et al.             Expires August 10, 2019               [Page 36]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -2069,7 +2069,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 37]
+Finn, et al.             Expires August 10, 2019               [Page 37]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -2125,7 +2125,7 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 38]
+Finn, et al.             Expires August 10, 2019               [Page 38]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
@@ -2181,15 +2181,14 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 39]
+Finn, et al.             Expires August 10, 2019               [Page 39]
 
 Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    [IEEE802.1TSNTG]
               IEEE Standards Association, "IEEE 802.1 Time-Sensitive
-              Networking Task Group", 2013,
-              <http://www.ieee802.org/1/tsn>.
+              Networking Task Group", <http://www.ieee802.org/1/tsn>.
 
    [IEEE802.3-2018]
               IEEE Standards Association, "IEEE Std 802.3-2018 Standard
@@ -2231,21 +2230,17 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
               Applications", STD 64, RFC 3550, DOI 10.17487/RFC3550,
               July 2003, <https://www.rfc-editor.org/info/rfc3550>.
 
-
-
-
-
-
-
-Finn, et al.             Expires August 5, 2019                [Page 40]
-
-Internet-Draft    Deterministic Networking Architecture    February 2019
-
-
    [RFC4655]  Farrel, A., Vasseur, J., and J. Ash, "A Path Computation
               Element (PCE)-Based Architecture", RFC 4655,
               DOI 10.17487/RFC4655, August 2006,
               <https://www.rfc-editor.org/info/rfc4655>.
+
+
+
+Finn, et al.             Expires August 10, 2019               [Page 40]
+
+Internet-Draft    Deterministic Networking Architecture    February 2019
+
 
    [RFC5921]  Bocci, M., Ed., Bryant, S., Ed., Frost, D., Ed., Levrau,
               L., and L. Berger, "A Framework for MPLS in Transport
@@ -2288,20 +2283,20 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
               Reservation", RFC 7813, DOI 10.17487/RFC7813, June 2016,
               <https://www.rfc-editor.org/info/rfc7813>.
 
-
-
-
-
-
-Finn, et al.             Expires August 5, 2019                [Page 41]
-
-Internet-Draft    Deterministic Networking Architecture    February 2019
-
-
    [RFC8227]  Cheng, W., Wang, L., Li, H., van Helvoort, H., and J.
               Dong, "MPLS-TP Shared-Ring Protection (MSRP) Mechanism for
               Ring Topology", RFC 8227, DOI 10.17487/RFC8227, August
               2017, <https://www.rfc-editor.org/info/rfc8227>.
+
+
+
+
+
+
+Finn, et al.             Expires August 10, 2019               [Page 41]
+
+Internet-Draft    Deterministic Networking Architecture    February 2019
+
 
    [RFC8402]  Filsfils, C., Ed., Previdi, S., Ed., Ginsberg, L.,
               Decraene, B., Litkowski, S., and R. Shakir, "Segment
@@ -2341,19 +2336,6 @@ Authors' Addresses
    Email: pthubert@cisco.com
 
 
-
-
-
-
-
-
-
-
-Finn, et al.             Expires August 5, 2019                [Page 42]
-
-Internet-Draft    Deterministic Networking Architecture    February 2019
-
-
    Balazs Varga
    Ericsson
    Magyar tudosok korutja 11
@@ -2361,6 +2343,15 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
    Hungary
 
    Email: balazs.a.varga@ericsson.com
+
+
+
+
+
+
+Finn, et al.             Expires August 10, 2019               [Page 42]
+
+Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
    Janos Farkas
@@ -2405,4 +2396,13 @@ Internet-Draft    Deterministic Networking Architecture    February 2019
 
 
 
-Finn, et al.             Expires August 5, 2019                [Page 43]
+
+
+
+
+
+
+
+
+
+Finn, et al.             Expires August 10, 2019               [Page 43]
