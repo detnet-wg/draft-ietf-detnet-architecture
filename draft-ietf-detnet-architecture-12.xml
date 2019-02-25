@@ -372,9 +372,12 @@
             network, but it can only be supplied to a DetNet flow that is limited
             at the source to a maximum packet size and transmission rate. 
 			
-			As DetNet provides allocated resources (including provisioned capacity)
-			to DetNet flows the use of transport layer congestion control
-			<xref target="RFC2914"/> by App-flows is explicitly not required.
+			As DetNet flows are assumed to be rate-limited and DetNet is designed
+			to provide sufficient allocated resources (including provisioned
+			capacity), the use of transport layer congestion control 
+			<xref target="RFC2914"/> for App-flows is not required; however,
+			if resources are allocated appropriately, use of congestion control
+			should not impact transmission negatively. 
 			
 		</t><t>
             Resource allocation addresses two of the DetNet QoS requirements:
@@ -458,7 +461,11 @@
 			data rate for any DetNet flow, except for brief periods when making up for
 			interfering traffic.  Any packet sent ahead of its time potentially adds to the
 			number of buffers required by the next hop DetNet node and may thus exceed the resources
-			allocated for a particular DetNet flow.
+			allocated for a particular DetNet flow. Furthermore, rate limiting, e.g., using traffic 
+			policing and shaping functions, e.g., <xref target="RFC2475"/>, at the ingress of the 
+			DetNet domain must be applied. This is needed for meeting the requirements of DetNet 
+			flows as well as for protecting non-DetNet traffic from potentially misbehaving DetNet
+			traffic sources.
 		</t><t>
 			The low-level mechanisms described in <xref target="QueuingModels"/> provide
 			the necessary
@@ -628,8 +635,7 @@ title="Packet replication and elimination">
 			or misrouted data is handled just the same as the equipment failures
 			that are handled by typical routing and bridging protocols.
 		</t><t>
-			If packet replication and elimination is used over paths with resource  allocation
-			(<xref target="Zero"/>), and member flows that take different-length paths
+			If member flows that take different-length paths
 			through the network are combined, a merge
 			point may require extra buffering to equalize the delays over the different paths.  This
 			equalization ensures that the resultant compound flow will not exceed its
