@@ -740,7 +740,7 @@ title="Packet replication and elimination">
               </list>
           </t><t>
               Starvation of non-DetNet traffic must be avoided, e.g., by traffic
-			  policing functions (e.g., <xref target="RFC2475"/>). Thus, the net
+			  policing and shaping functions (e.g., <xref target="RFC2475"/>). Thus, the net
 			  effect of the presence of DetNet flows in a network on the 
 			  non-DetNet flows is primarily a reduction in the available bandwidth.			  
           </t>
@@ -788,7 +788,7 @@ title="Packet replication and elimination">
               standardization, that can support these fault mitigation tasks that deliver a high probability that misbehaving
               systems will have zero impact on well-behaved DetNet flows, except of course, for
               the receiving interface(s) immediately downstream of the misbehaving device.
-              Examples of such techniques include traffic policing functions (e.g.,
+              Examples of such techniques include traffic policing and shaping functions (e.g.,
               <xref target="RFC2475"/>) and separating flows into per-flow rate-limited queues.
           </t>
       </section>
