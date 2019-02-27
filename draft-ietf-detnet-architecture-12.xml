@@ -485,7 +485,7 @@
        serial-digital cables (or buses) for highly reliable, synchronized and
        jitter-free communications. While the latency of analog transmissions is
        basically the speed of light, legacy serial links are usually slow (in the
-       order of Kbps) compared to, say, GigE, and some latency is usually
+       order of Kbps) compared to, say, Gigabit Ethernet, and some latency is usually
        acceptable. What is not acceptable is the introduction of excessive jitter,
        which may, for instance, affect the stability of control systems.
        </t>
@@ -499,8 +499,7 @@
        jitter (in the form of specifying minimum, as well as maximum, end-to-end latency)
        is supported by DetNet, there are practical limitations on packet-based networks
        in this regard. In general, users
-       are encouraged to use, instead of, "do this when you get the packet," a
-       combination of:
+       are encouraged to use a combination of:
        <list style="symbols">
 		 <t>
 			 Sub-microsecond time synchronization among all source and destination
@@ -555,7 +554,8 @@
 		    packet elimination (PEF), and the packet ordering functionality (POF)
 			for use in DetNet edge, relay node, and end system packet processing. 
 			Either of these functions can be enabled in a DetNet edge node, relay
-			node or end system. The collective name for all three functions is PREOF. 
+			node or end system. The collective name for all three functions is 
+			Packet Replication, Elimination, and Ordering Functions (PREOF). 
 			The packet replication and elimination service protection method
 			altogether involves four capabilities:
 			<list style="symbols">
@@ -747,7 +747,7 @@ title="Packet replication and elimination">
       </section>
       <section anchor="FaultMitigation" title="Fault Mitigation">
           <t>
-              Robust real-time systems require to reduce the number of
+              Robust real-time systems require reducing the number of
               possible failures. Filters and policers should be used in a DetNet network to
               detect if DetNet packets are received
               on the wrong interface, or at the wrong time, or in too great a volume.
@@ -962,12 +962,14 @@ End System        Node         Node           Node        End System
 </figure>
 
           <t>
-            Distinguishing the function of two DetNet data plane sub-layers, the DetNet service
-            sub-layer and the DetNet forwarding sub-layer, helps to
-            explore and evaluate various combinations of the data plane solutions
-            available, some are illustrated in <xref target="fig_adaptation"/>.  This separation of DetNet sub-layers, while helpful, should not be
-            considered as formal requirement.  For example, some technologies may violate
-            these strict sub-layers and still be able to deliver a DetNet service.
+            DetNet data plane is divided into two sub-layers: the DetNet
+			service sub-layer and the DetNet forwarding sub-layer. This 
+			helps to explore and evaluate various combinations of the data
+			plane solutions available. Some of them are are illustrated in 
+			<xref target="fig_adaptation"/>.  This separation of DetNet 
+			sub-layers, while helpful, should not be considered as formal
+			requirement.  For example, some technologies may violate these
+			strict sub-layers and still be able to deliver a DetNet service.
           </t>
 
 <figure anchor="fig_adaptation" align="center"
@@ -1047,14 +1049,14 @@ end system                                                 end system
 ]]></artwork>
 </figure>
             
-            <t>DetNet-UNIs ("U" in <xref target="fig_DetNetservice"/>) are assumed in this document to be packet-based reference points and provide connectivity over the packet network. A DetNet-UNI may provide multiple functions, e.g., it may add networking technology specific encapsulation to the DetNet flows if necessary; it may provide status of the availability of the resources associated with a reservation; it may provide a synchronization service for the end system; it may carry enough signaling to place the reservation in a network without a controller, or if the controller only deals with the network but not the end systems. Internal reference points of end systems (between the application and the NIC) are more challenging from control perspective and they may have extra requirements (e.g., in-order delivery is expected in end system internal reference points, whereas it is considered optional over the DetNet-UNI).</t>
+            <t>DetNet User Network Interfaces (DetNet-UNIs) ("U" in <xref target="fig_DetNetservice"/>) are assumed in this document to be packet-based reference points and provide connectivity over the packet network. A DetNet-UNI may provide multiple functions, e.g., it may add networking technology specific encapsulation to the DetNet flows if necessary; it may provide status of the availability of the resources associated with a reservation; it may provide a synchronization service for the end system; it may carry enough signaling to place the reservation in a network without a controller, or if the controller only deals with the network but not the end systems. Internal reference points of end systems (between the application and the NIC) are more challenging from control perspective and they may have extra requirements (e.g., in-order delivery is expected in end system internal reference points, whereas it is considered optional over the DetNet-UNI).</t>
             
         </section>
       </section>
 	  <section anchor="netrefsys" title="DetNet systems">
 	  <section anchor="es" title="End system">
 		<t> 
-		The native data flow between the source/destination end systems is referred to as application-flow (App-flow). The traffic characteristics of an App-flow can be CBR (constant bit rate) or VBR (variable bit rate) and can have L1 or L2 or L3 encapsulation (e.g., TDM (time-division multiplexing), Ethernet, IP). These characteristics are considered as input for resource reservation and might be simplified to ensure determinism during packet forwarding (e.g., making reservations for the peak rate of VBR traffic, etc.).
+		The native data flow between the source/destination end systems is referred to as application-flow (App-flow). The traffic characteristics of an App-flow can be CBR (constant bit rate) or VBR (variable bit rate) and can have Layer-1 or Layer-2 or Layer-3 encapsulation (e.g., TDM (time-division multiplexing), Ethernet, IP). These characteristics are considered as input for resource reservation and might be simplified to ensure determinism during packet forwarding (e.g., making reservations for the peak rate of VBR traffic, etc.).
 		</t>
 
 		<t> 
