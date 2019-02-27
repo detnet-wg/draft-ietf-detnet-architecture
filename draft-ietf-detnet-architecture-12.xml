@@ -233,7 +233,7 @@
 				well, in which case it is collocated with a transit node.
 			  </t>
 			  <t hangText="DetNet service sub-layer"><vspace blankLines="0"/>
-				The DetNet sub-layer at which A DetNet service, e.g., service protection is provided.
+				The DetNet sub-layer at which a DetNet service, e.g., service protection is provided.
 			  </t>
 			  <t hangText="DetNet service proxy"><vspace blankLines="0"/>
 				  Maps between App-flows and DetNet flows.
@@ -599,7 +599,7 @@
 		</t><t>
 			In the simplest case, this amounts to replicating each packet in a source that
 			has two interfaces, and conveying them through the network, along separate 
-			(SRLG disjoint) paths, to the
+			(Shared Risk Link Group (SRLG) disjoint) paths, to the
 			similarly dual-homed destinations, that discard the extras.  This ensures that one
 			path remains, even if some DetNet intermediate node fails.
 			The sequencing information can also be used for loss detection and for re-ordering.
