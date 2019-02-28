@@ -146,7 +146,8 @@
 		that can be used to identify DetNet flows and assign them to specific paths
 		through a network.
 	  </t><t>
-		A goal of DetNet is a converged network in all respects.  That is, the presence
+		A goal of DetNet is a converged network in all respects including the convergence of sensitive non-IP networks
+        onto a common network infrastructure.  The presence
 		of DetNet flows does not preclude non-DetNet flows, and the benefits offered
 		DetNet flows should not, except in extreme cases, prevent existing Quality of 
 		Service (QoS) mechanisms from operating in a
@@ -518,7 +519,7 @@
 	  <section anchor="srvcprot" title="Service Protection">
 	   <t>
 	    Service protection aims to mitigate or eliminate packet loss due to
-		equipment failures, random media and/or memory faults. These types of 
+		equipment failures, including random media and/or memory faults. These types of 
 		packet loss can be greatly reduced by spreading the data over multiple
 		disjoint forwarding paths. Various service protection methods are 
 		described in <xref target="RFC6372"/>, e.g., 1+1 linear protection.
@@ -553,7 +554,7 @@
             The DetNet service sub-layer includes the packet replication (PRF), the
 		    packet elimination (PEF), and the packet ordering functionality (POF)
 			for use in DetNet edge, relay node, and end system packet processing. 
-			Either of these functions can be enabled in a DetNet edge node, relay
+			These functions can be enabled in a DetNet edge node, relay
 			node or end system. The collective name for all three functions is 
 			Packet Replication, Elimination, and Ordering Functions (PREOF). 
 			The packet replication and elimination service protection method
