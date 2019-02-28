@@ -466,7 +466,7 @@
 			policing and shaping functions, e.g., <xref target="RFC2475"/>, at the ingress of the 
 			DetNet domain must be applied. This is needed for meeting the requirements of DetNet 
 			flows as well as for protecting non-DetNet traffic from potentially misbehaving DetNet
-			traffic sources.
+			traffic sources. Note that large buffers have some issues, see, e.g., <xref target="BUFFERBLOAT"/>. 
 		</t><t>
 			The low-level mechanisms described in <xref target="QueuingModels"/> provide
 			the necessary
@@ -684,8 +684,7 @@ title="Packet replication and elimination">
 			Explicit routes can be established in various ways, e.g., with  
 			RSVP-TE <xref target="RFC3209"/>, with Segment Routing (SR)
 			<xref target="RFC8402"/>, via a Software 
-			Defined Networking approach <xref target="RFC7426"/>, 
-			<xref target="RFC8453"/>, and <xref target="RFC8453"/>, with IS-IS 
+			Defined Networking approach <xref target="RFC8453"/>, with IS-IS 
 			<xref target="RFC7813"/>, etc.
 			Explicit routes are typically used in MPLS TE LSPs.
 		</t><t>
@@ -1434,6 +1433,11 @@ End system    |  +----+ |       /   \/ \_      | +----+  | End system
 
 	  </section>
 	  <section anchor="FlowIDatTechBord" title="Flow identification at technology borders">
+	     <t>This section discusses what needs to be done at technology borders including 
+		 Ethernet as one of the technologies. Flow identification for MPLS and IP data
+		 planes are described in <xref target="I-D.ietf-detnet-dp-sol-mpls"/> and
+		 <xref target="I-D.ietf-detnet-dp-sol-ip"/>, respectively.
+		 </t>
 
 	  <section anchor="Relayering" title="Exporting flow identification">
 		<t>
@@ -1900,7 +1904,8 @@ ETH-ID           |      +-----+----+       |  \ Recognize
             <date></date>
          </front>
       </reference>
-      <reference anchor="CCAMP" target="https://datatracker.ietf.org/doc/charter-ietf-ccamp/">
+      
+	  <reference anchor="CCAMP" target="https://datatracker.ietf.org/doc/charter-ietf-ccamp/">
          <front>
             <title>Common Control and Measurement Plane Working Group</title>
             <author>
@@ -1909,6 +1914,21 @@ ETH-ID           |      +-----+----+       |  \ Recognize
             <date></date>
          </front>
       </reference>
+	  
+      <reference anchor="BUFFERBLOAT">
+        <front>
+          <title>Bufferbloat: Dark Buffers in the Internet</title>
+
+          <author fullname="J. Gettys" initials="J." surname="Gettys"></author>
+
+          <author fullname="K. Nichols" initials="K." surname="Nichols"></author>
+		  
+          <date month="January" year="2012" />
+        </front>
+
+        <format octets="Communications of the ACM, Volume 55 Issue 1, Pages 57-65 " target="https://dl.acm.org/citation.cfm?id=2063176.2063196" type="PDF" />
+      </reference>
+	  
 	</references>
   </back>
 </rfc>
