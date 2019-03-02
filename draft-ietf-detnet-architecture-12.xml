@@ -1394,7 +1394,9 @@ title="Northbound and Southbound interfaces">
 		  While these techniques are currently embedded in Ethernet  <xref target="IEEE802.3-2018"/> and bridging standards,
 		  we can note that they are all, except perhaps for packet preemption, equally applicable
 		  to other media than Ethernet, and to routers as well as bridges. Other media may have its
-		  own methods, see, e.g., <xref target="I-D.ietf-6tisch-architecture"/>, <xref target="RFC7554"/>. DetNet may include such
+		  own methods, see, e.g., <xref target="I-D.ietf-6tisch-architecture"/>, <xref target="RFC7554"/>. 
+		  Further techniques are defined by the IETF, e.g., <xref target="RFC8289"/> and <xref target="RFC8033"/>.
+		  DetNet may include such
 		  definitions in the future, or may define how these techniques can be used by DetNet nodes. 
 		</t>
 	  </section>
@@ -1765,7 +1767,9 @@ ETH-ID           |      +-----+----+       |  \ Recognize
 	  <?rfc include='reference.RFC.7426'?>
 	  <?rfc include='reference.RFC.7554'?>
 	  <?rfc include='reference.RFC.7813'?>
+	  <?rfc include='reference.RFC.8033'?>
 	  <?rfc include='reference.RFC.8227'?>
+	  <?rfc include='reference.RFC.8289'?>
 	  <?rfc include='reference.RFC.8402'?>
 	  <?rfc include='reference.RFC.8453'?>
 	  
