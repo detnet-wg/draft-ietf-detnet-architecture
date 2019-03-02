@@ -689,7 +689,7 @@ title="Packet replication and elimination">
 			Explicit routes are typically used in MPLS TE LSPs.
 		</t><t>
 			Out-of-order packet delivery can be a side effect of distributing a
-			single flow over multiple paths especially when there is a change 
+			single flow over multiple paths, especially when there is a change 
 			from one path to another when combining the flow. This is 
 			irrespective of the distribution method used, and also applies to
 			service protection over explicit routes. As described in 
@@ -892,10 +892,10 @@ title="DetNet data plane protocol stack">
                     </t>
                     <t hangText="Resource allocation"><vspace blankLines="0"/>
                         The DetNet forwarding sub-layer provides resource allocation. See <xref target="QueuingModels"/>.
-                        The actual queuing and shaping mechanisms are typically provided by underlying subnet,
-                        these can be closely associated with the means of providing paths
-                        for DetNet flows,
-                        the path and the resource allocation are conflated in this figure.
+                        The actual queuing and shaping mechanisms are typically provided by underlying subnet.
+                        These can be closely associated with the means of providing paths
+                        for DetNet flows.
+                        The path and the resource allocation are conflated in this figure.
                     </t>
 					<t hangText="Explicit routes"><vspace blankLines="0"/>
                         The DetNet forwarding sub-layer provides mechanisms to ensure that fixed paths are provided
@@ -926,7 +926,7 @@ title="DetNet data plane protocol stack">
         <section title="DetNet Data Plane Overview" anchor="sec_dt_dp">
           <t>
             A "Deterministic Network" will be composed of DetNet enabled end
-            systems, DetNet edge nodes, DetNet relay nodes and collectively deliver DetNet
+            systems, DetNet edge nodes, and DetNet relay nodes, which collectively deliver DetNet
             services.  DetNet relay and edge nodes are interconnected via DetNet transit nodes
             (e.g., LSRs) which support DetNet, but are not DetNet service
             aware. All DetNet nodes are connected to
@@ -997,7 +997,7 @@ title="DetNet adaptation to data plane">
             There are many valid options to create a data plane solution for DetNet
             traffic by selecting a technology approach for the DetNet service sub-layer and
             also selecting a technology approach for the DetNet forwarding sub-layer. There are
-            a high number of valid combinations.
+            a large number of valid combinations.
           </t>
           <t>
             One of the most fundamental differences between different potential
@@ -1287,7 +1287,7 @@ title="Categorization of end systems">
          to respect per-flow constraints such as security and
 			latency, and optimize the overall result for metrics such as an 
          abstract aggregated cost. The deterministic sequence can typically be
-         more complex than a direct sequence and include redundancy path, with 
+         more complex than a direct sequence and include redundant paths, with 
          one or more packet replication and elimination points. Scaling to larger 
 		 networks is discussed in <xref target="Scaling"/>.
 		</t>
