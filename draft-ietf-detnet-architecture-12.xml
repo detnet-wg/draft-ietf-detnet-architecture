@@ -1682,35 +1682,89 @@ ETH-ID           |      +-----+----+       |  \ Recognize
 	<section anchor="SecurityConsiderations" title="Security Considerations">
 	  
 		<t>
-		  Security in the context of Deterministic Networking has an added
-			dimension; the time of delivery of a packet can be just as important
-			as the contents of the packet, itself.  A man-in-the-middle attack,
-			for example, can impose, and then systematically adjust, additional
-			delays into a link, and thus disrupt or subvert a real-time
-			application without having to crack any encryption methods employed.
-			See <xref target="RFC7384"/> for an
-			exploration of this issue in a related context.
+		  Security considerations for DetNet are described in detail in
+		  <xref target="I-D.ietf-detnet-security"/>. This section considers
+		  exclusively security considerations which are specific to the DetNet
+		  Architecture.
+        </t><t>
+		  Security aspects which are unique to DetNet are those whose aim is to
+		  secure the specific quality of service aspects of DetNet, which are
+		  primarily to deliver data flows with extremely low packet loss rates
+		  and bounded end-to-end delivery latency. A DetNet is implemented using
+		  MPLS and IP (including both v4 and v6) technologies, and thus inherits
+		  the security properties of those technologies at both the control
+		  plane and the data plane.
+        </t><t>
+		  Security considerations for DetNet are constrained (compared to, for
+		  example, the open Internet) because DetNet is defined to operate only
+		  within a single administrative domain (see Section 1). The primary
+		  considerations are to secure the request and control of DetNet
+		  resources, maintain confidentiality of data traversing the DetNet,
+		  and provide uninterrupted availability of the DetNet quality of service.
+        </t><t>
+		  To secure the request and control of DetNet resources, authentication
+		  and authorization must be provided for each device connected to a 
+		  DetNet domain, most importantly to network controller devices. Control
+		  of a DetNet network may be centralized or distributed (within a single
+		  administrative domain). In the case of centralized control, precedent
+		  for security considerations as defined for Abstraction and Control of 
+		  Traffic Engineered Networks (ACTN) can be found in 
+		  <xref target="RFC8453"/>, Section 9. In the case of a distributed
+		  control protocols, DetNet security is expected to be provided by the 
+		  security properties of the protocols in use. In any case, the result 
+		  must be that manipulation of administratively configurable parameters 
+		  is limited to authorized entities.
+        </t><t>
+		  To maintain confidentiality of data traversing the DetNet,
+		  application flows must be protected through whatever means is
+		  provided by the underlying technology. For example, encryption may be
+		  used, such as that provided by IPSec for IP (Layer 3) flows and by
+		  MACSec for Ethernet (Layer 2) flows. DetNet flows are identified on a
+		  per-flow basis, which may provide attackers with additional
+		  information about the data flows (when compared to networks that do
+		  not include per-flow identification); this is an inherent property of
+		  DetNet which has security implications which must be considered when
+		  determining if DetNet is a suitable technology for any given use case.
+		  Similar consideration may need to be given to the use of replicated
+		  packet flows, which result in increased surface for Reconnaissance
+		  attacks. In any case, the result must be that the confidentiality of
+		  the data is maintained to a degree sufficient for the use cases
+		  addressed by the given DetNet implementation.
+        </t><t>
+		  To provide uninterrupted availability of the DetNet quality of
+		  service, provisions must be made against DOS attacks and delay
+		  attacks. To protect against DOS attacks, excess traffic due to
+		  malicious or malfunctioning devices must be prevented or mitigated,
+		  for example through the use of traffic admission control applied at
+		  the input of a DetNet domain, as described in <xref target="Zero"/>,
+		  and through the fault mitigation methods described in
+		  <xref target="FaultMitigation"/>.
+        </t><t>
+		  To prevent DetNet packets from being delayed, protection must be 
+		  provided against Man-In-The-Middle attacks, for example through use
+		  of authentication and authorization of devices within the DetNet
+		  domain.
+        </t><t>
+		  Time synchronization methods are not specified by DetNet, however any
+		  time synchronization method used with DetNet must also be secured,
+		  using the security methods available for the given time
+		  synchronization mechanism, for example as described in
+		  <xref target="RFC7384"/>.
 		</t><t>
-			Furthermore, in a control system where millions of dollars of equipment, or even
-			human lives, can be lost if the DetNet QoS is not delivered, one must consider
-			not only simple equipment failures, where the box or wire instantly becomes
-			perfectly silent, but complex errors such as can be caused by software failures.
-			Because there is essential no limit to the kinds of failures that can occur,
-			protecting against realistic equipment failures is indistinguishable, in most
-			cases, from protecting against malicious behavior, whether accidental or intentional.
-			See also <xref target="FaultMitigation"/>.
-		</t>
-	  <t>Security must cover:
-		<list style="symbols"> <t>
-		  the protection of the signaling protocol
-		</t><t>
-		  the authentication and authorization of the controlling systems
-		</t><t>
-		  the identification and shaping of the DetNet flows
-		</t> </list>			  
-	  </t>
-	  <t>Security considerations for DetNet are described in detail in <xref target="I-D.ietf-detnet-security"/>.
-	  </t>
+		  In any case, the result must be that the DetNet is protected from DOS,
+		  delay, and time manipulation attacks to the extent sufficient for the
+		  use cases addressed by the given DetNet implementation.
+        </t><t>
+		  DetNet use cases are known to have widely divergent security
+		  requirements. The intent of this section is to provide a baseline for
+		  security considerations which are common to all DetNet designs and 
+		  implementations, without burdening individual designs with specifics
+		  of security infrastructure which may not be germane to the given use
+		  case. Designers and Implementers of DetNet systems are expected to
+		  take use case specific considerations into account in their DetNet
+		  designs and implementations. 
+		</t>		
+		
 	</section>
 	<section title="Privacy Considerations">
 	  <t>
