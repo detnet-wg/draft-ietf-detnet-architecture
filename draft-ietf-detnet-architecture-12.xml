@@ -217,8 +217,10 @@
 				be provided.
 			  </t>
 			  <t hangText="DetNet forwarding sub-layer"><vspace blankLines="0"/>
-				  The DetNet layer that optionally provides resource allocation for DetNet flows
-				  over paths provided by the underlying network.
+				  DetNet functionality is divided into two sub-layers. One of 
+				  them is the DetNet forwarding sub-layer, which optionally
+				  provides resource allocation for DetNet flows over paths
+				  provided by the underlying network.
 			  </t>
 			  <t hangText="DetNet intermediate node"><vspace blankLines="0"/>
 				  A DetNet relay node or DetNet transit node.
@@ -234,7 +236,9 @@
 				well, in which case it is collocated with a transit node.
 			  </t>
 			  <t hangText="DetNet service sub-layer"><vspace blankLines="0"/>
-				The DetNet sub-layer at which a DetNet service, e.g., service protection is provided.
+				  DetNet functionality is divided into two sub-layers. One of 
+				  them is the DetNet service sub-layer, at which a DetNet service,
+				  e.g., service protection is provided.
 			  </t>
 			  <t hangText="DetNet service proxy"><vspace blankLines="0"/>
 				  Maps between App-flows and DetNet flows.
@@ -1712,8 +1716,8 @@ ETH-ID           |      +-----+----+       |  \ Recognize
 		  <xref target="RFC8453"/>, Section 9. In the case of a distributed
 		  control protocols, DetNet security is expected to be provided by the 
 		  security properties of the protocols in use. In any case, the result 
-		  must be that manipulation of administratively configurable parameters 
-		  is limited to authorized entities.
+		  is that manipulation of administratively configurable parameters is
+		  limited to authorized entities.
         </t><t>
 		  To maintain confidentiality of data traversing the DetNet,
 		  application flows can be protected through whatever means is
@@ -1722,17 +1726,12 @@ ETH-ID           |      +-----+----+       |  \ Recognize
 		  (Layer 3) flows and by MACSec <xref target="IEEE802.1AE-2018"/> for
 		  Ethernet (Layer 2) flows. 
         </t><t>		  
-		  DetNet flows are identified on a per-flow basis, which may provide 
-		  attackers with additional information about the data flows (when 
-		  compared to networks that do not include per-flow identification); 
-		  this is an inherent property of DetNet which has security
-		  implications which must be considered when determining if DetNet is
-		  a suitable technology for any given use case. Similar consideration
-		  may need to be given to the use of replicated packet flows, which
-		  result in increased surface for Reconnaissance attacks. In any case,
-		  the result must be that the confidentiality of the data is
-		  maintained to a degree sufficient for the use cases addressed by the
-		  given DetNet implementation.
+          DetNet flows are identified on a per-flow basis, which may provide
+          attackers with additional information about the data flows (when
+          compared to networks that do not include per-flow identification).
+          This is an inherent property of DetNet which has security
+          implications which should be considered when determining if DetNet is
+          a suitable technology for any given use case.
         </t><t>
 		  To provide uninterrupted availability of the DetNet quality of
 		  service, provisions can be made against DOS attacks and delay
@@ -1743,7 +1742,7 @@ ETH-ID           |      +-----+----+       |  \ Recognize
 		  and through the fault mitigation methods described in
 		  <xref target="FaultMitigation"/>. To prevent DetNet packets from
 		  being delayed by an entity external to a DetNet domain, DetNet
-		  technology definition must allow for the mitigation of 
+		  technology definition can allow for the mitigation of 
 		  Man-In-The-Middle attacks, for example through use of
 		  authentication and authorization of devices within the DetNet domain.
         </t><t>
@@ -1753,10 +1752,6 @@ ETH-ID           |      +-----+----+       |  \ Recognize
 		  of critical importance. Extensive discussion of this topic can be
 		  found in <xref target="RFC7384"/>.
 		</t><t>
-		  In any case, the result must be that the DetNet is protected from DOS,
-		  delay, and time manipulation attacks to the extent sufficient for the
-		  use cases addressed by the given DetNet implementation.
-        </t><t>
 		  DetNet use cases are known to have widely divergent security
 		  requirements. The intent of this section is to provide a baseline for
 		  security considerations which are common to all DetNet designs and 
