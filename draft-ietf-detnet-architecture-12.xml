@@ -105,7 +105,7 @@
 		the path of the flow; 2) providing explicit routes for DetNet flows that do not
 		immediately change with the network topology; and 3) distributing data from DetNet flow packets
 		over time and/or space to ensure delivery of each packet's data in spite of the loss of a path.
-        DetNet operates at the IP layer and delivers service over sub-network technologies such as MPLS
+        DetNet operates at the IP layer and delivers service over lower layer technologies such as MPLS
         and IEEE 802.1 Time-Sensitive Networking (TSN).
 	  </t>
 	</abstract>
@@ -130,7 +130,7 @@
 		as the Internet.
 	  </t><t>		
         DetNet operates at the IP layer and delivers service over
-        sub-network technologies such as MPLS and IEEE 802.1 Time-Sensitive Networking (TSN).
+        lower layer technologies such as MPLS and IEEE 802.1 Time-Sensitive Networking (TSN).
         DetNet accomplishes these goals by dedicating network resources such as link bandwidth
 		and buffer space to DetNet flows and/or
 		classes of DetNet flows, and by replicating packets along multiple paths.
@@ -185,7 +185,7 @@
 				  Resources are dedicated to support a DetNet flow. Depending on an implementation, the resource may be reused by non-DetNet flows when it is not used by the DetNet flow.
 			  </t> 
 			  <t hangText="App-flow"><vspace blankLines="0"/>
-				The native format of a DetNet flow.
+				The payload (data) carried over a DetNet service.
 			  </t>
 			  <t hangText="DetNet compound flow and DetNet member flow"><vspace blankLines="0"/>
 				A DetNet compound flow is a DetNet flow that has been separated into
@@ -212,9 +212,10 @@
 				  It is analogous to a Label Edge Router (LER) or a Provider Edge (PE) router.
 			  </t>
 			  <t hangText="DetNet flow"><vspace blankLines="0"/>
-				A DetNet flow is a sequence of packets from one source to one or more destinations, 
-				which conform uniquely to a flow identifier, and to which the DetNet service is to 
-				be provided.
+				A DetNet flow is a sequence of packets which conform uniquely
+				to a flow identifier, and to which the DetNet service is to be
+				provided. It includes any DetNet headers added to support the
+				DetNet service and forwarding sub-layers.
 			  </t>
 			  <t hangText="DetNet forwarding sub-layer"><vspace blankLines="0"/>
 				  DetNet functionality is divided into two sub-layers. One of 
@@ -576,7 +577,8 @@
 				into multiple DetNet member flows and typically sends them along
 				multiple different paths to the destination(s), e.g., over the
 				explicit routes of <xref target="pinned"/>. The location within
-				a DetNet node, and the mechanism used for the PRF is implementation specific.
+				a DetNet node, and the mechanism used for the PRF is left open
+				for implementations.
 			  </t><t>
 				The Packet Elimination Function (PEF) eliminates duplicate packets
 				of a DetNet flow based on the sequencing information and a history
@@ -586,7 +588,7 @@
 				Replication points exist. But the most common case is to 
 				perform this operation at the very edge of the DetNet network,
 				preferably in or near the receiver. The location within a DetNet node,
-				and mechanism used for the PEF is implementation specific.
+				and mechanism used for the PEF is left open	for implementations.
 			  </t><t>
 			    The Packet Ordering Function (POF) uses the sequencing information
 				to re-order a DetNet flow's packets that are received out of order.
@@ -594,7 +596,7 @@
 			</list>
 		</t><t>
 		    The order in which a DetNet node applies PEF, POF, and PRF to a DetNet flow is
-		    implementation specific.
+		    left open for implementations.
 		</t><t>
             Some service protection mechanisms rely on switching from one flow
 			to another when a failure of a flow is detected. Contrarily, packet
@@ -847,7 +849,7 @@ title="DetNet data plane protocol stack">
                     </t>
                     <t hangText="Packet sequencing"><vspace blankLines="0"/>
                         As part of DetNet service protection, supplies the sequence number for
-                        packet replication and elimination (<xref target="srvcprot"/>).  Peers
+                        packet replication and elimination (<xref target="srvcprot"/>), thus  peers
                         with Duplicate elimination.  This sub-layer is not needed if a higher layer protocol
                         is expected to perform any packet sequencing and duplicate elimination
                         required by the DetNet flow replication.
@@ -937,7 +939,7 @@ title="DetNet data plane protocol stack">
             sub-networks, where a point-to-point link is also considered as a
             simple sub-network. These
             sub-networks will provide DetNet compatible service for support of DetNet
-            traffic.  Examples of sub-networks include MPLS TE, IEEE 802.1 TSN and
+            traffic.  Examples of sub-network technologies include MPLS TE, IEEE 802.1 TSN and
             OTN.  Of course, multi-layer DetNet systems may also be possible, where
             one DetNet appears as a sub-network, and provides service to, a higher layer
             DetNet system. A simple DetNet concept network is shown in <xref target="fig_detnet"/>.
@@ -1060,7 +1062,7 @@ end system                                                 end system
 	  <section anchor="netrefsys" title="DetNet systems">
 	  <section anchor="es" title="End system">
 		<t> 
-		The native data flow between the source/destination end systems is referred to as application-flow (App-flow). The traffic characteristics of an App-flow can be CBR (constant bit rate) or VBR (variable bit rate) and can have Layer-1 or Layer-2 or Layer-3 encapsulation (e.g., TDM (time-division multiplexing), Ethernet, IP). These characteristics are considered as input for resource reservation and might be simplified to ensure determinism during packet forwarding (e.g., making reservations for the peak rate of VBR traffic, etc.).
+		The traffic characteristics of an App-flow can be CBR (constant bit rate) or VBR (variable bit rate) and can have Layer-1 or Layer-2 or Layer-3 encapsulation (e.g., TDM (time-division multiplexing), Ethernet, IP). These characteristics are considered as input for resource reservation and might be simplified to ensure determinism during packet forwarding (e.g., making reservations for the peak rate of VBR traffic, etc.).
 		</t>
 
 		<t> 
@@ -1128,14 +1130,22 @@ title="Categorization of end systems">
           
           <section anchor="DetNetFlowsTypes" title="DetNet flow types">
               <t>
-                  A DetNet flow can have different formats while its packets are forwarded between the peer end systems. Therefore, the following possible types / formats of a DetNet flow are distinguished in this document:
-                  <list style="symbols">
-                      <t> App-flow: native format of the data carried over a DetNet flow. It does not contain any DetNet related attributes.</t>
-                      <t> DetNet-f-flow: specific format of a DetNet flow. It only requires the resource allocation features provided by the DetNet forwarding sub-layer. </t>
-                      <t> DetNet-s-flow: specific format of a DetNet flow. It only requires the service protection feature ensured by the DetNet service sub-layer. </t>
-                      <t> DetNet-sf-flow: specific format of a DetNet flow. It requires both DetNet service
+			     A DetNet flow can have different formats while its packets are
+				 forwarded between the peer end systems depending on the type 
+				 of the end systems. Corresponding to the end system types, 
+				 the following possible types / formats of a DetNet flow are 
+				 distinguished in this document. The different flow types have
+				 different requirements to DetNet nodes.
+                 <list style="symbols">
+                    <t> App-flow: payload (data) carried over a DetNet flow
+					  between DetNet unaware end systems. An app-flow does not
+					  contain any DetNet related attributes and does not imply any
+					  specific requirement on DetNet nodes.</t>
+                    <t> DetNet-f-flow: specific format of a DetNet flow. It only requires the resource allocation features provided by the DetNet forwarding sub-layer. </t>
+                     <t> DetNet-s-flow: specific format of a DetNet flow. It only requires the service protection feature ensured by the DetNet service sub-layer. </t>
+                     <t> DetNet-sf-flow: specific format of a DetNet flow. It requires both DetNet service
                           sub-layer and DetNet forwarding sub-layer functions during forwarding. </t>
-                  </list>
+                 </list>
               </t>
           </section>
           
@@ -1168,8 +1178,7 @@ title="Categorization of end systems">
                   </list>
               </t><t>
                   These parameters, together with knowledge of the protocol stack used (and thus the
-                  size of the various headers added to a packet), limit the number of bit times per
-                  observation interval that the DetNet flow can occupy the physical medium.
+                  size of the various headers added to a packet), provide the bandwidth that is needed for the the DetNet flow.
               </t><t>
                   The source is required not to exceed these limits in order to obtain DetNet service.  If the source
                   transmits less data than this limit allows, the unused resource such as link
@@ -1180,7 +1189,7 @@ title="Categorization of end systems">
                   period of time.
 	  
               </t><t>
-                  There is no expectation in DetNet for App-flows to be responsive to implicit <xref target="RFC2914"/> or explicit congestion notification <xref target="RFC3168"/>. The assumption
+                  There is no expectation in DetNet for App-flows to be responsive to congestion control <xref target="RFC2914"/> or explicit congestion notification <xref target="RFC3168"/>. The assumption
                   is that a DetNet flow, to be useful, must be delivered in its entirety.  That
                   is, while any useful application is written to expect a certain number of lost
                   packets, the real-time applications of interest to DetNet demand that the loss of
@@ -1641,7 +1650,7 @@ ETH-ID           |      +-----+----+       |  \ Recognize
 			the number of buffers dedicated for DetNet allocation, and the worst-case
 			forwarding delay and misordering.
 		  </t><t>
-			The dynamic state of a DetNet node's DetNet resources.
+			The actual state of a DetNet node's DetNet resources.
 		  </t><t>
 			The identity of the DetNet system's neighbors, and the characteristics of the
 			link(s) between the DetNet systems, including the latency of
@@ -1675,7 +1684,7 @@ ETH-ID           |      +-----+----+       |  \ Recognize
 			sub-networks, i.e., Layer-2 technologies.
 			These sub-networks will
 			provide DetNet compatible service for support of DetNet traffic.
-			Examples of sub-networks include MPLS TE, 802.1 TSN, and a point-to-point OTN link.
+			Examples of sub-network technologies include MPLS TE, 802.1 TSN, and a point-to-point OTN link.
 			Of course, multi-layer DetNet systems may be possible too, where one
 			DetNet appears as a sub-network, and provides service to, a higher layer
 			DetNet system.
@@ -1765,8 +1774,11 @@ ETH-ID           |      +-----+----+       |  \ Recognize
 	</section>
 	<section title="Privacy Considerations">
 	  <t>
-		DetNet is provides a Quality of Service (QoS), and as such, does not directly
-		raise any new privacy considerations.
+		DetNet provides a Quality of Service (QoS), and as such, is not expected
+		to directly raise any new privacy considerations, the generic
+		considerations for such mechanisms apply. In particular, such markings
+		allow for an attacker to correlate flows or to select particular types
+		of flow for more detailed inspection.
 	  </t><t>
 		However, the requirement for every (or almost every) node along the path of
 		a DetNet flow to identify DetNet flows may present an additional attack
